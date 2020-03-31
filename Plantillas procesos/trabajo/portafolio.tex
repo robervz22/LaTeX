@@ -1,0 +1,235 @@
+\documentclass[
+letterpaper,
+11pt, % Cambiar a 10 si es que no cabe
+oneside,
+onecolumn, %twocolumn para dos columnas
+article
+]{memoir}
+
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes} % La fuente a usar, si no compila quitar esta línea
+\usepackage[svgnames]{xcolor} % Required for colour specification
+\medievalpage
+
+% Paquetes para matemáticas
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage[spanish,onelanguage,ruled,linesnumbered]{algorithm2e}
+
+\usepackage[final]{microtype}
+\usepackage{graphicx} % Para incluir figuras
+\usepackage{lipsum}
+
+\usepackage{hyperref}
+
+\setlrmarginsandblock{0.15\paperwidth}{*}{1} % Para onecolumn
+\setulmarginsandblock{0.5in}{1.5in}{1}  % Márgenes superior e inferior
+\checkandfixthelayout
+
+\addto{\captionsspanish}{%
+  \renewcommand{\bibname}{\Large Referencias}
+}
+
+\counterwithout{section}{chapter}
+\counterwithout{figure}{chapter}
+
+\makepagestyle{plain}
+\makeevenfoot{plain}{\thepage}{}{}
+\makeoddfoot{plain}{}{}{\thepage}
+\makeevenhead{plain}{}{}{}
+\makeoddhead{plain}{}{}{}
+
+\makeatletter %
+\makechapterstyle{standard}{
+  \setlength{\beforechapskip}{2\baselineskip}
+  \setlength{\midchapskip}{0\baselineskip}
+  \setlength{\afterchapskip}{2\baselineskip}
+  \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}}
+  \renewcommand{\chapnamefont}{\normalfont\Large}
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapternamenum}{\space}
+  \renewcommand{\chapnumfont}{\normalfont\Large}
+  %\renewcommand{\printchapternum}{\chapnumfont \thechapter.}
+  %\renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+  \renewcommand{\afterchapternum}{ }
+  \renewcommand{\printchapternonum}{\vspace*{\midchapskip}\vspace*{5mm}}
+  \renewcommand{\chaptitlefont}{\bfseries\LARGE}
+  \renewcommand{\printchaptertitle}[1]{\chaptitlefont ##1}
+  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip}
+}
+\makeatother
+
+\chapterstyle{standard}
+
+\makeatletter %
+\makechapterstyle{appendix}{
+  \setlength{\beforechapskip}{2\baselineskip}
+  \setlength{\midchapskip}{0\baselineskip}
+  \setlength{\afterchapskip}{2\baselineskip}
+  \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}}
+  \renewcommand{\chapnamefont}{\normalfont\Large}
+  \renewcommand{\printchaptername}{\chapnamefont \@chapapp}
+  \renewcommand{\chapternamenum}{\space}
+  \renewcommand{\chapnumfont}{\normalfont\Large}
+  \renewcommand{\printchapternum}{\chapnumfont \thechapter.}
+  %\renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+  \renewcommand{\afterchapternum}{ }
+  \renewcommand{\printchapternonum}{\vspace*{\midchapskip}\vspace*{5mm}}
+  \renewcommand{\chaptitlefont}{\bfseries\LARGE}
+  \renewcommand{\printchaptertitle}[1]{\chaptitlefont ##1}
+  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip}
+}
+\makeatother
+
+% Se definen los comandos para escribir teoremas, definiciones y demás.
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposici\'on}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definici\'on}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observaci\'on}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aquí va la portada
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlingpage} % Portada
+
+    \raggedleft % Alineada a la derecha
+    %\raggedright % Alineada a la izquierda
+	
+	\vspace*{\baselineskip} % Whitespace at the top of the page
+	
+	\vspace*{0.25\textheight} % Whitespace before the title
+	
+	%------------------------------------------------
+	%	Cosas del título
+	%------------------------------------------------
+	
+    \textbf{\huge Procesos Estocásticos I}\\[\baselineskip] % Nombre de la materia
+    
+    \vspace*{0.1\textheight}
+
+    {\Huge{\textbf{Ponerle título}}}\\[\baselineskip] % Aquí va el título
+    \vspace*{0.1\textheight}
+
+    %------------------------------------------------
+	%	Aquí van los nombres
+	%------------------------------------------------
+    
+    {\Large Alumno 1}\\[\baselineskip]
+    {\Large Alumno 2}\\[\baselineskip]
+    {\Large Alumno 3}\\[\baselineskip]
+    {\Large Alumno 4}\\[\baselineskip]
+    {\Large Alumno 5}\\[\baselineskip]
+	
+	\vfill
+
+\end{titlingpage}
+
+\thispagestyle{empty}
+
+\chapter*{Cadenas de Markov} % 
+
+% Copiar y pegar lo que tengan de la cadena de Markov
+
+\noindent \lipsum[1-9]
+
+Para escribir un teorema:
+
+\begin{theorem}
+    Hola
+\end{theorem}
+
+Para escribir una definición:
+
+\begin{definition}
+    Lo que sea.
+\end{definition}
+
+\newpage
+
+\chapter*{Proceso Poisson}
+
+% Copiar y pegar lo que tengan del proceso Poisson
+
+\newpage
+
+\chapter*{Martingalas}
+
+% Copiar y pegar lo que tengan de martingalas
+
+\newpage
+
+\chapter*{Movimiento browniano}
+
+% Copiar y pegar lo que tengan del movimiento browniano
+
+\newpage
+
+\appendix
+\chapterstyle{appendix}
+
+\chapter{Códigos}
+
+\noindent En esta parte van todos los códigos. Un ejemplo del paquete \texttt{listings}:
+
+\begin{lstlisting}[language=R]
+  poisson_tiempo <- function(Tiempo, intensidad){
+      # Numero de saltos
+      N_aux <- rpois(n = 1, lambda = intensidad * Tiempo)
+      # Donde ocurrieron los saltos
+      # Agregamos el cero y el tiempo final
+      tiempos <- c(0, sort(runif(n = N_aux, max = Tiempo)), Tiempo)
+      # Regresamos data frame con los tiempos y 
+      # los valores para graficar
+      return(
+          data.frame(
+              t = tiempos,
+              n = c(0:N_aux, N_aux)
+          )
+      )
+  }
+\end{lstlisting}
+
+Si lo prefieren, pueden escribir pseudoalgoritmos con el paquete \texttt{algorithm2e}. Un ejemplo:
+
+\begin{algorithm}[H]
+  \Begin{
+    Simular $X \sim h$ y $U \sim \mathrm{U}(0,1)$ \;
+    \lIf{$\frac{M h(X) U}{g(X)} \leq 1$}{se acepta $X$}
+    \lElse{se regresa a 2}
+  }
+  \KwResult{Una simulación $X \sim g$.}
+  \caption{Método de aceptación y rechazo.}
+\end{algorithm}
+
+\newpage
+
+\chapter{Imágenes}
+
+\noindent En esta parte pueden poner imágenes.
+
+\newpage
+
+\backmatter
+
+\chapter*{Referencias}
+
+\end{document}
