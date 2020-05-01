@@ -8,4 +8,10 @@ Para otras distribuciones habrá que verlo caso a caso.
 
 **Una vez** que se haya instalado la distribución, y solamente después de instalarla, habrá que preocuparse por un IDE con el cual sea cómodo poder trabajar con LaTeX. Una opción sólida, que está disponible para distintos sistemas operativos es [Texmaker](https://www.xm1math.net/texmaker/). Otra opción es usar [Visual Studio Code](https://code.visualstudio.com/) con las extensión [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop).
 
-Seguro luego sale otra cosa, entonces esto se modificará. Salebai.
+Algunos enlaces de interés:
+- [Lista de símbolos](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
+- [Más símbolos (es un pdf)](http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf)
+- [Documentación en Overleaf](https://www.overleaf.com/learn/latex/Main_Page)
+- [StackExchange de TeX](https://tex.stackexchange.com/)
+
+Seguro luego sale otra cosa, entonces esto se modificará. Se valen recomendaciones. :)
