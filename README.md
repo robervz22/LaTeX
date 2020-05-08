@@ -10,8 +10,10 @@ Para otras distribuciones habrá que verlo caso a caso.
 
 Algunos enlaces de interés:
 - [Lista de símbolos](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
-- [Más símbolos (es un pdf)](http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf)
+- [Más símbolos (pdf)](http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf)
 - [Documentación en Overleaf](https://www.overleaf.com/learn/latex/Main_Page)
 - [StackExchange de TeX](https://tex.stackexchange.com/)
+- [Ejemplos de TikZ y PGF](http://www.texample.net/tikz/examples/)
+- [Documentación de _booktabs_ para tablas bellas (pdf)](https://ctan.math.illinois.edu/macros/latex/contrib/booktabs/booktabs.pdf)
 
 Seguro luego sale otra cosa, entonces esto se modificará. Se valen recomendaciones. :)
