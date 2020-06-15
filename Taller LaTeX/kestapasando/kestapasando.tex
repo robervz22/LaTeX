@@ -1,0 +1,121 @@
+\documentclass[11pt,article,oneside]{memoir}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+
+\usepackage{mathtools} % Carga amsmath
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{wasysym}
+
+% Otra fuente
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+% Usamos los paquetitos de la otra persona
+
+\usepackage{hyperref}
+\usepackage{enumitem} % IMPORTANTE
+\usepackage{microtype}
+%\usepackage{showframe}
+
+\hypersetup{pdfborder = {0 0 0}}
+
+% Márgenes
+\setulmarginsandblock{2.5cm}{2.5cm}{*}
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\checkandfixthelayout
+
+\title{Algoritmos de simulación}
+\author{inm}
+\date{}
+
+\pagestyle{simple}
+
+% Ambientes de teoremas
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{example}{Ejemplo}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observación}
+
+% Declaración de comandos y operadores
+\newcommand\RR{\mathbb R}
+\newcommand\1{\mathbbm 1}
+\newcommand\PP{\mathbb P}
+\newcommand\dd{\,\mathrm d}
+\DeclareMathOperator\cov{Cov}
+\DeclareMathOperator\var{Var}
+\DeclareMathOperator\gauss{N}
+\DeclareMathOperator\unif{U}
+\DeclareMathOperator\expo{Exp}
+\DeclareMathOperator\gam{Ga}
+\DeclareMathOperator\cau{Cauchy}
+\DeclareMathOperator\dbeta{Beta}
+
+% Operadores "especiales"
+\newcommand\abs[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+
+\renewcommand{\qedsymbol}{$\frownie$}
+
+\begin{document}
+\maketitle
+
+\noindent Algunos recordatorios de las relaciones entre variables aleatorias.
+
+\begin{lemma}
+    Las siguientes relaciones son verdaderas.
+    \begin{enumerate}
+        \item Si $U \sim \mathrm \unif(0,1)$ y $\lambda > 0$ entonces $-\log(U)/\lambda \sim \expo(\lambda)$.
+        \item Si $Z \sim \gauss(0,1)$ entonces $Z^2 \sim \chi_{1}^2 = \gam(1/2, 1/2)$.
+        \item Si $Z_1, Z_2 \sim \gauss(0,1)$ son independientes entonces $Z_2 / Z_2 \sim \cau(0,1)$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Para establecer el inciso 1, consideremos $U \sim \unif(0,1)$, denotemos $X = -\log(U)/\lambda$ y observemos que para $x < 0$, $\PP(X \leq x) = 0$, mientras que para $x \geq 0$, 
+    \[
+        \PP(X \leq x) = \PP(\log(U) \geq -\lambda x) = \PP(U \geq e^{-\lambda x}) = 1 - e^{-\lambda x}.
+    \]
+
+    Para ver que el inciso 2 es verdadero supongamos que $Z \sim \gauss(0,1)$. Para $x < 0$, $\PP(Z^2 \leq x) = 0$; por otra parte, si $x \geq 0$ entonces
+    \[
+        \PP(Z^2 \leq x) = \PP(-\sqrt x \leq Z \leq \sqrt x) = \Phi(\sqrt x) - \Phi(-\sqrt x),
+    \]
+    donde la última igualdad se da por la continuidad de $Z$ y la definición de $\Phi$. Así pues, cuando $x \geq 0$, derivando con respecto a $x$ y usando la densidad de una normal estándar obtenemos que 
+    \[
+        f_{Z^2}(x) = \frac{1}{\sqrt{2\pi x}} e^{-\frac 1 2 x} = \frac{\left(\frac 1 2 \right)^\frac{1}{2}}{\Gamma \left(\frac 1 2\right)} x^{\frac{1}{2} - 1} e^{-\frac 1 2 x},
+    \]
+    donde hemos usado que $\Gamma(1/2) = \sqrt \pi$.
+
+    Para concluir, recordemos que si $Y$ y $W$ son variables aleatorias continuas e independientes, entonces 
+    \[
+        f_{W/Y}(x) = \int_{-\infty}^\infty \abs{y} f_Y(y) f_W(wy) \dd y.
+    \]
+    En efecto, para $x \in \RR$ tendremos que
+    \begin{align*}
+        \PP\left(\frac W Y \leq x \right) & = \iint_{\{w/y \leq x\}} f_Y(y) f_W(w) \dd w\dd y \\
+        & = \int_{-\infty}^0 \int_{xy}^\infty f_Y(y) f_W(w) \dd w\dd y + \int_0^\infty \int_{-\infty}^{xy} f_Y(y) f_W(w) \dd w\dd y \\
+        & = \int_{-\infty}^0 \int_x^{-\infty} y f_Y(y) f_W(zy) \dd z\dd y + \int_0^\infty \int_{-\infty}^x y f_Y(y) f_W(zy) \dd z\dd y \\
+        & = \int_{-\infty}^x \left( \int_{-\infty}^0 (-y) f_Y(y) f_W(zy) \dd y +  \int_0^\infty y f_Y(y) f_W(zy) \dd y \right) \dd z \\
+        & = \int_{-\infty}^x \int_{-\infty}^\infty \abs{y} f_Y(y) f_W{zy} \dd y\dd z,
+    \end{align*}
+    donde la tercera igualdad se da por el cambio de variable $z = w/y$ y la cuarta igualdad es Fubini y un poco de álgebra. Así las cosas, si $C = Z_2 / Z_1$, entonces para $x \in \RR$, 
+    \[
+        f_C(x) = \int_{-\infty}^\infty \abs{y} \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}} \frac{1}{\sqrt{2\pi}} e^{-\frac{(xy)^2}{2}} \dd y = \frac 1 \pi \int_0^\infty y e^{- \frac{(1+x^2)y^2}{2}} \dd y = \frac{1}{\pi(1 + x^2)},
+    \]
+    que es la densidad de una variable aleatoria $\cau(0,1)$.
+\end{proof}
+
+% Podemos importar textos .tex directamente sin copiar y pegar :O
+% La primera manera: input
+\input{colaboraciones/colaborador1}
+% La segunda: include
+\input{colaboraciones/colaborador2}
+
+\end{document}

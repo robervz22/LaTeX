@@ -1,0 +1,35 @@
+En un curso de probabilidad suele verse el método de Box--Muller, el cual nos dice que si $U_1, U_2 \sim \unif(0,1)$ son independientes entonces la transformación 
+\begin{align*}
+    Z_1 & = \sqrt{-2\log(U_1)} \cos(2\pi U_2), \\
+    Z_2 & = \sqrt{-2\log(U_1)} \sen(2\pi U_2),
+\end{align*}
+nos da un vector aleatorio $(Z_1, Z_2)$ con $Z_1, Z_2 \sim \gauss(0,1)$ independientes. Analicemos estas expresiones detenidamente y observemos que 
+\begin{align*}
+    -2\log(U_1) & = Z_1^2 + Z_2^2, \\
+    \tan(2 \pi U_2) & = Z_2 /Z_1.
+\end{align*}
+Del recordatorio sabemos que $Z_i^2 \sim \gam(1/2, 1/2)$, por lo que $Z_1^2+Z_2^2 \sim \gam(1, 1/2) = \exp(1/2)$, lo cual concuerda con que $-2\log(U_1) \sim \expo(1/2)$. ¡Pero tenemos más! Observemos que $Z_2/Z_1 \sim \cau(0,1)$, por lo que $\tan(2\pi U_2) \sim \cau(0,1)$, es decir que hemos encontrado una forma de simular variables aleatorias Cauchy. 
+
+Ahora, podemos aprovechar el método de Box--Muller para obtener variables normales independientes no estándar sin morir en el intento. Pues si $\lambda_1, \lambda_2 > 0$ y $U_1, U_2 \sim \unif(0,1)$ son independientes, entonces el vector aleatorio $(X_1, X_2)$, definido por la transformación
+\begin{align*}
+    X_1 & = \sqrt{-\frac 1 {\lambda_1} \log (U_1)} \cos(2\pi U_2), \\
+    X_2 & = \sqrt{-\frac 1 {\lambda_2} \log (U_1)} \sen(2\pi U_2),
+\end{align*}
+es tal que $X_1$ y $X_2$ son variables aleatorias independientes tales que $X_i \sim \gauss(0, (2\lambda_i)^{-1})$, puesto que se dará la igualdad $X_i = (2\lambda_i)^{-1/2} Z_i$.
+
+Dejando de lado Box--Muller, algunas otras consecuencias del recordatorio, considerando una sucesión $\{U_i\}_{i \geq 1}$ de variables aleatorias independientes e idénticamente distribuidas $\unif(0,1)$, son las siguientes:
+\begin{enumerate}
+    \item Si $\nu \geq 1$ es entero, $Y = - 2 \sum_{j = 1}^\nu \log(U_j) \sim \chi_{2\nu}^2 = \gam((2\nu)/2, 1/2)$.
+    \item Si $\alpha \geq 1$ es entero y $\lambda > 0$, $Y = -\sum_{j = 1}^\alpha \log(U_j) / \lambda \sim \gam(\alpha, \lambda)$.
+    \item Si $\alpha, \beta \geq 1$ son enteras, entonces 
+    \[
+        Y = \frac{\sum_{j = 1}^\alpha \log(U_j)}{\sum_{j = 1}^{\alpha+\beta} \log(U_j)} \sim \dbeta(\alpha, \beta).
+    \]
+\end{enumerate}
+Los primeros dos resultado son claros y se dejan al lector. Para ver que el tercer resultado es cierto, probaremos algo más general: para $\alpha, \beta > 0$, si $Y_1 \sim \gam(\alpha, 1)$ y $Y_2 \sim \gam(\beta, 1)$ son independientes, entonces $Y_1/(Y_1+Y_2) \sim \dbeta(\alpha, \beta)$ será independiente de $Y_1 + Y_2 \sim \gam(\alpha + \beta, 1)$. Con este fin, definamos $W = Y_1/(Y_1 + Y_2)$ y $S = Y_1 + Y_2$. Del teorema de cambio de variable, 
+\begin{align*}
+    f_{W, S}(w,s) & = s f_{Y_1}(ws) f_{Y_2}(s-ws) \\
+    & = s \times \frac{1}{\Gamma(\alpha)} (ws)^{\alpha - 1} e^{-ws} \1_{\RR_+}(ws) \times \frac{1}{\Gamma(\beta)} (s-ws)^{\beta - 1} e^{s-ws} \1_{\RR_+}(s-ws) \\
+    & = \left( \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha) \Gamma(\beta)} w^{\alpha-1} (1-w)^{\beta - 1} \1_{(0,1)}(w) \right) \times \left( \frac{1}{\Gamma(\alpha + \beta)} s^{(\alpha + \beta) - 1} e^{-s} \1_{\RR_+}(s) \right).
+\end{align*}
+Que el inciso 3 es cierto es ahora inmediato.
