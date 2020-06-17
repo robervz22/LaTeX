@@ -1,9 +1,10 @@
-\documentclass[12pt]{article}
+\documentclass[a4paper, landscape, twocolumn,15pt]{article}
+%minimal: Este tipo de documento sólo permite establecer el tamaño de la página y la fuente. Documentos MUY cortos
+%proc: Documentos más cortos
 %article: Documentos cortos
+%report: Documentos medio largos
 %book: Hacer libros(Capítulos, apéndices)
-%report: Documentos MUY cortos
 %memoir: Todo en 1
-
 %Más fuentes en 
 %https://community.rstudio.com/t/cant-creat-pdf-cant-find-tinytex-or-miktex-files/34960
 %https://tug.org/FontCatalogue/mathfonts.html
@@ -11,6 +12,7 @@
 %12pt: Tamaño de letra de 12 puntos
 %twocolumns: Doble columna
 \usepackage{ 
+comment,        %Para hacer comentarios largos
 graphicx,       %Para meter figuritas
 enumitem,       %Para hacer listas chidas (Paquete esencial en la vida)
 amsfonts,       %Las letras de pizarra
@@ -22,7 +24,9 @@ mathrsfs,       %Letras cursivas matemáticas
 bm,             %Letras matemáticas negritas
 bbm,            %Esta da la indicadora con \mathbbm 1
 actuarialsymbol,%Símbolos actuariales
-physics         %Símbolos físicos
+physics,        %Símbolos físicos
+chronology,     %Líneas de tiempo
+tikz            %Figuras
 }
 \usepackage[ruled,vlined,spanish,onelanguage]{algorithm2e} %Algoritmos
 \usepackage[utf8]{inputenc}
@@ -107,7 +111,7 @@ Fibonacci($aux-1$)+Fibonacci($aux-2$)
 \end{algorithm}
 
 
-\begin{algorithm}[H]
+\begin{algorithm}
  \KwData{Una matriz $C$ de costos.}
  \KwResult{$\overline U$ conjunto inicial de asignaciones,\\ $\varphi$ un inicial vector de asignación de personas,\\ $f$ un vector inicial de asignación de tareas,\\$(u,v)$ una solución dual factible.}
   \For{$i \in\{1,...,n\}$}{
@@ -128,13 +132,94 @@ Fibonacci($aux-1$)+Fibonacci($aux-2$)
  \caption{Preprocesamiento}
 \end{algorithm}
 
-\begin{figure}[htp]
-\centering
-\includegraphics[scale = 0.1]{lol}
-\caption{looool}
-\end{figure}
-
 
 5tef
 erger
+
+\begin{comment}
+A ver David, aquí debes de poner tu parte de la tarea
+¡¡¡Aquí!!!
+¡¡¡AQUÍ!!!
+\end{comment}
+
+\# \$ \% \^{} \& \_ $\{$ $\}$ \~{} $\backslash$
+
+
+
+\begin{itemize}
+\item 10pt, 11pt, 12pt,... : Cambiar el tamaño de la fuente.
+\item a4paper, letterpaper, legalpaper: Tamaño del papel.
+\item fleqn: Pasar las fórmulas del centro a la izquierda.
+\item leqno: números de izquerda a derecha.
+\item titlepage, notitlepage: para poner o no poner una sola página con título.
+\item twocolumn, onecolumn: para poner el documento con dos columnas o una columna.
+\item twoside, oneside: Documento de dos caras o una cara(article o report).
+\item landscape: Para que el documento esté en forma horizontal.
+\item openright, openany: Para que el nuevo capítulo (de un documento tipo Book) empiece del lado derecho o empiece en cualquier lado.
+\end{itemize}
+
+\[\left| \det \begin{pmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{pmatrix}\right|
+\]
+
+\[\bordermatrix{ & 1 & 2 \cr 
+1 & 1/2 & 1/2 \cr 
+2 & 1/2 & 1/2 \cr }\]
+
+\[\begin{bmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{bmatrix}
+\]
+
+\[\begin{Bmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{Bmatrix}
+\]
+
+\[\begin{vmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{vmatrix}
+\]
+
+\[\Bigg(\begin{matrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{matrix}\Bigg)
+\]
+
+\[\mathbb E \left[Y_{t+1} \Bigg| \sum_{i=1}^{N_t}Y_i\right] \]
+
+\[\int_a^b x dx = \frac{x^2}{2}\bigg|_{x=a}^{x=b}\]
+
+\[f(x) = \begin{cases}
+ \lambda e^{-\lambda x} & \text{si }x>0,\\
+ 0 & \text{e.o.c.}
+ \end{cases}
+\]
+
+\[\text{frfrf }\int_a^b f\]
+
+Quiero meter matrices al texto $\mathcal{E}leospapie$$\begin{pmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{pmatrix}$, esto se va a ver feo :'(. $\left(\begin{smallmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+\end{smallmatrix}\right)$
+
+
+
+
+
 \end{document}
