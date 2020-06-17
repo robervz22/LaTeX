@@ -1,0 +1,92 @@
+\chapter{Apéndice de resultados}
+
+\noindent En esta sección enunciaremos algunos resultados que se usarán en las notas. Cabe aclarar que varios de estos resultados no se enuncian en su generalidad puesto que se necesitan herramientas de teoría de la medida para enunciarlos y entenderlos. Asimismo, por su naturaleza, varios de los resultados aquí expuestos no se demuestran en las notas, aunque se da la referencia pertinente para el lector entusiasta.
+
+Los primeros temas que se enunciarán tienen que ver con convergencia de esperanzas, sus demostraciones se pueden consultar en el capítulo 9 de \cite{JacodProtter02}.
+
+\begin{theorem}[Teorema de convergencia monótona] \label{teo:convmon}
+    Sea $\{Y_n\}_{n \in \NN}$ una sucesión de variables aleatorias no negativas tales que $Y_n \leq Y_{n+1}$ para toda $n \in \NN$. Si además $Y$ es una variable aleatoria tal que $Y_n \to Y$ con probabilidad uno entonces 
+    \[
+        \lim_{n \to \infty} \EE[Y_n] = \EE[Y].    
+    \]
+\end{theorem}
+
+\begin{theorem}[Teorema de convergencia dominada] \label{teo:convdom}
+    Sea $\{Y_n\}_{n \in \NN}$ una sucesión de variables aleatorias tales que $Y_n \to Y$ con probabilidad uno. Si existe una variable aleatoria no negativa $\xi$ con $\EE[\xi] < \infty$ tal que $\abs{Y_n} \leq \xi$ para toda $n \in \NN$, entonces $\EE[\abs{Y_n}] < \infty$ para toda $n \in \NN$, $\EE[\abs{Y}] < \infty$ y 
+    \[
+        \lim_{n \to \infty} \EE[Y_n] = \EE[Y].    
+    \]
+\end{theorem}
+
+Como caso particular del teorema \ref{teo:convdom} es cuando $\xi$ es una constante $M > 0$. Dentro de probabilidad este caso particular resulta ser tan útil que merece su propio enunciado.
+
+\begin{corollary}[Teorema de convergencia acotada] \label{teo:convaco}
+    Sea $\{Y_n\}_{n \in \NN}$ una sucesión de variables aleatorias tales que $Y_n \to Y$ con probabilidad uno. Si existe $M > 0$ tal que $\abs{Y_n} \leq M$ para toda $n \in \NN$, entonces $\EE[\abs{Y_n}] < \infty$ para toda $n \in \NN$, $\EE[\abs{Y}] < \infty$ y 
+    \[
+        \lim_{n \to \infty} \EE[Y_n] = \EE[Y].    
+    \]
+\end{corollary}
+
+El siguiente teorema, la ley fuerte de grandes números, es uno de los resultados principales de la teoría de probabilidad. La primera parte del enunciado requiere de técnicas más avanzadas de las que se pueden cubrir en estas notas y se puede consultar la demostración en la sección 12.10 de \cite{Williams91} o en el artículo \cite{Etemadi81}. La segunda parte se probará suponiendo que la primera parte es cierta.
+
+\begin{theorem}[Ley fuerte de grandes números] \label{teo:lfgn}
+    Sea $\{Y_n\}_{n \in \NN}$ una sucesión de variables aleatorias independientes e idénticamente distribuidas tales que $\EE[\abs{Y_1}] < \infty$. Entonces 
+    \[
+    \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^n Y_i = \mu
+    \]
+    con probabilidad uno, donde $\mu = \EE[Y_1]$. Si $\{Y_n\}_{n \in \NN}$ son no negativas y $\mu = \infty$, el resultado sigue siendo válido.
+\end{theorem}
+
+\begin{proof}
+    Consideremos una sucesión de variables aleatorias no negativas $\{Y_n\}_{n \in \NN}$ independientes e idénticamente distribuidas tales que $\EE[Y_1] = \infty$. Para $N < \infty$ definamos $Y_n^N = Y_n \wedge n := \min\{Y_n, N\}$. Entonces por la primera parte del teorema 
+    \[
+        \frac 1 n \sum_{i = 1}^n Y_i \geq \frac 1 n \sum_{i = 1}^n Y_i^N \to \EE[Y_1^N]
+    \]
+    cuando $n \to \infty$ con probabilidad uno. Notemos que si $N_1 < N_2$ entonces $Y_1^{N_1} \leq Y_1^{N_2}$ y que $Y_{1}^N \to Y_1$ cuando $N \to \infty$, por lo que del teorema \ref{teo:convmon},
+    \[
+        \lim_{N \to \infty} \EE[Y_1^N] = \EE[Y_1] = \infty.    
+    \]
+    Luego entonces,
+    \[
+        \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^n Y_i = \infty
+    \]
+    con probabilidad uno.
+\end{proof}
+
+Situándonos en un contexto de procesos estocásticos, consideremos una cadena de Markov $\bm X = \{X_n\}_{n \in \NN}$ con espacio de estados $\Ee$ y consideremos un conjunto $\Cc \subset \Ee$ finito. Definamos $T_\Cc = \inf\{n \geq 0 : X_n \in \Cc\}$, es decir el tiempo en el que la cadena está por primera vez en $\Cc$. Notemos que $T_\Cc$ toma valores en $\NN \cup \{\infty\}$ y que para $n \in \NN$, 
+\[
+    \{T_\Cc = n\} = \{X_0 \notin \Cc, X_1 \notin \Cc, \ldots, X_{n-1} \notin \Cc, X_n \in \Cc\},
+\]
+de donde el evento $\{T_\Cc = n\}$ depende únicamente de $X_0, X_1, \ldots, X_n$. Este es un ejemplo de un \emph{tiempo de de paro}, concepto que definimos ahora.
+
+\begin{definition} \label{def:tiempodeparo}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ definida en un espacio de probabilidad $(\Omega, \Ff, \PP)$. Diremos que $T : \Omega \to \NN \cup \{\infty\}$ es un \emph{tiempo de paro} si el evento $\{T = n\}$ depende únicamente de $X_0, X_1, \ldots, X_n$ para toda $n \in \NN$.
+\end{definition}
+
+Recordemos que la propiedad de Markov nos dice que para toda $n \in \NN$,
+\[
+    \PP(X_{n+1} = i_{n+1} \,\vert\, X_n = i_n, \ldots, X_0 = i_0) = \PP(X_{n+1} = i_{n+1} \,\vert\, X_n = i_n).
+\]
+Es natural preguntarnos si en lugar índices deterministas consideramos índices aleatorios, ¿la propiedad de Markov se seguirá cumpliendo? La respuesta es sí cuando el índice aleatorio es un tiempo de paro. A este resultado se le conoce como \emph{propiedad fuerte de Markov}, nombre que se le da por ser una extensión de la propiedad de Markov.
+
+\begin{theorem}[Propiedad fuerte de Markov] \label{teo:markovfuerte}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $T$ es un tiempo de paro, entonces condicional el $T < \infty$ y $X_T = i$, al definir $Y_n = X_{T+n}$ con $n \in \NN$, $\bm Y = \{Y_n\}_{n \in \NN}$ es una cadena de Markov, independiente de $X_0, \ldots, X_T$, con espacio de estados $\Ee$ y matriz de transición $P$.
+\end{theorem}
+
+\begin{proof}
+    Sea $E$ un evento determinado por $X_0, X_1, \ldots, X_T$. Como $E \cap \{T = n\} \subset \{T = n\}$, entonces $E \cap \{T = n\}$ dependerá únicamente de $X_0, X_1, \ldots, X_n$ por ser $T$ tiempo de paro. Entonces, 
+    \begin{align*}
+        & \PP(\{Y_0 = j_0, Y_1 = j_1, \ldots, Y_m = j_m\} \cap E \cap \{T = n\} \cap \{X_T = i\}) \\
+        & \quad = \PP(X_{n} = j_0, X_{n+1} = j_1, \ldots, X_{n+m} = j_{m} \,\vert\, X_n = i) \PP(E \cap \{T = n\} \cap \{X_T = i\}) \\
+        & \quad = \PP(X_0 = j_0, X_1 = j_1, \ldots, X_m = j_{m} \,\vert\, X_0 = i) \PP(E \cap \{T = n\} \cap \{X_T = i\}),
+    \end{align*}
+    donde se ha usado la propiedad de Markov en la primera igualdad y la homogeneidad en la segunda. Sumando sobre $n \in \NN$ y dividiendo entre $\PP(T < \infty, X_T = i)$ obtenemos 
+    \[
+        \begin{split}
+            & \PP(\{Y_0 = j_0, Y_1 = j_1, \ldots, Y_m = j_m\} \cap E \,\vert\, T < \infty, X_T = i) \\
+            & \quad = \PP(X_0 = j_0, X_1 = j_1, \ldots, X_m = j_{m} \,\vert\, X_0 = i) \PP(E \,\vert\, T < \infty, X_T = i). \qedhere
+        \end{split} 
+    \]
+\end{proof}
+
+Intuitivamente podemos pensar en esta propiedad como en un reinicio de la cadena después de que suceda un evento aleatorio.

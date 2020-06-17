@@ -1,0 +1,376 @@
+\section{Visitas a estados recurrentes y la existencia de distribuciones estacionarias}
+\label{sec:existencia}
+
+\noindent Para poder estudiar el comportamiento asintótico de $P_{ij}^n$ para ciertas cadenas de Markov, primero estudiaremos el comportamiento asintótico de 
+\[
+    \frac 1 n \sum_{m = 1}^n P_{ij}^m
+\]
+para cadenas de Markov arbitrarias. Esto nos pondrá en una posición favorable para después estudiar la existencia de distribuciones estacionarias, comenzando con cadenas irreducibles, para después pasar a cadenas de Markov generales. Las pruebas de los resultados que se presentan en esta sección se basan en interpretaciones probabilistas.
+
+Con este fin en mente, considerando una cadena de Markov $\bm X = \{X_n\}_{n \in \NN}$ con espacio estados $\Ee$ definamos, para $j \in \Ee$ fija,
+\[
+    N_j^n = \sum_{m = 1}^n \1_{\{X_m = j\}} \quad \text{ y } \quad N_j = \sum_{m = 1}^\infty  \1_{\{X_m = j\}},
+\]
+que cuentan el número de veces que la cadena $\bm X$ pasa por el estado $j$ en los primeros $n$ pasos y en total de forma respectiva. A continuación se enuncia un resultado, que usaremos más adelante, sobre estas variables cuando $j \in \Ee$ es un estado transitorio.
+
+\begin{lemma}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $j \in \Ee$ es un estado transitorio, entonces $N_j < \infty$ con probabilidad uno y $\EE[N_j \,\vert\, X_0 = i] < \infty$ para cualquier $i \in \Ee$.
+\end{lemma}
+
+\begin{proof}
+    Recordemos que $T_j = \inf\{n \geq 1 : X_n = j\}$ es la primera vez que $\bm X$ está en el estado $j$, con $\inf \varnothing = \infty$ por convención, y que $\rho_{jj} = \PP(T_j < \infty \,\vert\, X_0 = j) < 1$ por ser $j$ un estado transitorio. Es claro que $T_j$ es un tiempo de paro ---ver definición \ref{def:tiempodeparo}---. Usaremos esto para probar que 
+    \begin{equation}
+        \PP(N_j = n \,\vert\, X_0 = i) = \begin{cases}
+            1-\rho_{ij} & \text{ si } n = 0, \\
+            \rho_{ij} \rho_{jj}^{n-1} (1 - \rho_{jj}) & \text{ si } n \geq 1.
+        \end{cases} \label{eq:probasNj}
+    \end{equation}
+    Así las cosas, notemos que $\{N_j = 0\} = \{T_j = \infty\}$, por lo que 
+    \[
+        \PP(N_j = 0 \,\vert\, X_0 = i) = \PP(T_j = \infty \,\vert\, X_0 = i) = 1 - \PP(T_j < \infty \,\vert\, X_0 = i) = 1 - \rho_{ij}.
+    \]
+    Para $n \geq 1$ tendremos que 
+    \begin{align*}
+        \PP(N_j = n \,\vert\, X_0 = i) & = \PP(N_j = n \,\vert\, T_j < \infty, X_0  = i) \PP(T_j < \infty \,\vert\, X_0 = i) \\
+        & \quad + \PP(N_j = n \,\vert\, T_j = \infty, X_0  = i) \PP(T_j = \infty \,\vert\, X_0 = i) \\
+        & = \PP \Bigg( \sum_{m = 1}^{T_j} \1_{\{X_m = j\}} + \sum_{m = T_j+1}^\infty \1_{\{X_m = 1\}} = n \,\Bigg\vert\, T_j < \infty, X_0 = i \Bigg) \rho_{ij} \\
+        & = \PP\Bigg(\sum_{m = T_j+1}^\infty \1_{\{X_m = j\}} = n - 1 \,\Bigg\vert\, T_j < \infty, X_0 = i \Bigg) \rho_{ij} \\
+        & = \PP \Bigg( \sum_{m = 1}^\infty \1_{\{X_m = j\}} = n-1 \,\Bigg\vert\, X_0 = j \Bigg) \rho_{ij} \\
+        & = \PP(N_j = n-1 \,\vert\, X_0 = j) \rho_{ij},
+    \end{align*}
+    donde se usó la propiedad fuerte de Markov ---ver teorema \ref{teo:markovfuerte}--- en la cuarta igualdad. Un argumento inductivo nos permite obtener (\ref{eq:probasNj}). Teniendo esto, para $i \in \Ee$,
+    \begin{align*}
+        \EE[N_j \,\vert\, X_0 = i] & = \sum_{n = 1}^\infty n \PP(N_j = n \,\vert\, X_0 = i) = \sum_{n = 1}^\infty n \rho_{ij} \rho_{jj}^{n-1}(1- \rho_{jj}) = \frac{\rho_{ij}}{1 - \rho_{jj}} < \infty.
+    \end{align*}
+    Entonces para toda $i \in \Ee$, $\PP(N_j < \infty \,\vert\, X_0 = i) = 1$ y, por un argumento de probabilidad total, $\PP(N_j < \infty) = 1$, lo cual concluye la prueba.
+\end{proof}
+
+¿Cómo es que aplicamos esto?  Si $j \in \Ee$ es transitorio, observando que $N_j^n \leq N_j < \infty$ con probabilidad uno, se sigue que 
+\[
+    \lim_{n \to \infty} \frac {N_j^n} n = 0
+\] 
+con probabilidad uno. Además tendremos que 
+\begin{align*}
+    \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m & = \lim_{n \to \infty} \frac 1 n  \sum_{m = 1}^n \EE[\1_{\{X_m = j\}} \,\vert\, X_0 = i] \\
+    & = \lim_{n \to \infty} \EE \left[ \frac {N_j^n} n \,\bigg\vert\, X_0 = i \right] \\
+    & \leq \lim_{n \to \infty} \frac 1 n \EE[N_j \,\vert\, X_0 = i] \\
+    & = 0.
+\end{align*}
+
+Antes de proseguir, consideremos un estado cualquiera $j \in \Ee$ y definamos el \emph{tiempo medio de retorno} a $j$ de una cadena que comience en $j$, $m_j = \EE[T_j \,\vert\, X_0 = j]$ que puede tomar el valor $\infty$. Definamos además $\1_{\{T_j < \infty\}}$, la variable aleatoria que es 1 si $T_j < \infty$ y cero en otro caso. El siguiente resultado es uno de los resultados principales de la sección, del cual hemos demostrado ya una parte.
+
+\begin{theorem} \label{teo:convergenciaprobacesaro}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $j \in \Ee$ entonces 
+    \begin{equation}
+        \lim_{n \to \infty} \frac {N_j^n} n = \frac 1 {m_j} \1_{\{T_j < \infty\}} \label{eq:limitepropvisitas}
+    \end{equation}
+    con probabilidad uno. Además
+    \begin{equation}
+        \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m = \lim_{n \to \infty} \frac 1 n \EE[N_j^n \,\vert\, X_0 = i] = \frac {\rho_{ij}} {m_j} \label{eq:limiteprobacesaro}
+    \end{equation}
+    para toda $i \in \Ee$.
+\end{theorem}
+
+Si $m_j = \infty$, el lado derecho de (\ref{eq:limitepropvisitas}) y (\ref{eq:limiteprobacesaro}) se define como cero por convención, para que se satisfaga en el caso transitorio.\footnote{Y ciertos casos recurrentes.}
+
+\begin{proof}
+    El caso en el que $j \in \Ee$ es transitorio se probó antes de enunciar el teorema, por lo que podremos suponer que $j \in \Ee$ es recurrente, \emph{i.e.} $\rho_{jj} = 1$. Supongamos además que $X_0 = j$. Definamos $W_0^j = 0$ y, para $n \geq 1$, $W_n^j = \inf\{m \geq 1 : N_j^m = n\}$, el tiempo en el que $\bm X$ visita $j$ por $n$-ésima vez. Definamos además $T_n^j = W_n^j - W_{n-1}^j$, los tiempos entre visitas a $j$, para $n \geq 1$. De la propiedad de Markov y homogeneidad se deduce fácilmente que
+    %\begin{align*}
+    %    \PP(T_j^{n+1} = m_{n+1} \,\vert\, T_j^n = m_n, \ldots, T_j^1 = m_1) & = \PP(T_j = m_{n+1} \,\vert\, X_0 = j),
+    %\end{align*}
+    %de donde se sigue que
+    \begin{align*}
+        \PP(T_n^j = m_n, \ldots, T_1^j = m_1 \,\vert\, X_0 = j) & = \prod_{k = 1}^{n} \PP(T_j = m_k \,\vert\, X_0 = j).
+    \end{align*}
+    Por lo tanto $\{T_n^j\}_{n \geq 1}$, condicional en $X_0 = j$, es una sucesión de variables aleatorias independientes e idénticamente distribuidas con media $m_j = \EE[T_j \,\vert\, X_0 = j]$. Además $W_n^j = \sum_{m = 1}^n T_m^j$ y así, por el teorema \ref{teo:lfgn},
+    \begin{equation}
+        \lim_{n \to \infty} \frac{W_n^j}{n} = m_j  \label{eq:limiteWs}
+    \end{equation}
+    con probabilidad uno.
+
+    Ahora notemos que $W_{N_j^n}^j \leq n < W_{N_j^n + 1}^j$, pues la $N_j^n$-ésima visita a $j$ tiene que suceder a lo más al tiempo $n$ y $N_j^n + 1$-ésima visita debe suceder después del tiempo $n$. Por lo tanto, 
+    \[
+        \frac{W_{N_j^n}^j}{N_j^n} \leq \frac n {N_j^n} < \frac{W_{N_j^n+1}^j}{N_j^n},
+    \]
+    con $n$ suficientemente grande para que $N_j^n \geq 1$. Como $j$ es recurrente, $N_j^n \to N_j = \infty$ con probabilidad uno. Luego, por las desigualdades anteriores y (\ref{eq:limiteWs}), 
+    \[
+        \lim_{n \to \infty} \frac{n}{N_j^n} = m_j
+    \]
+    con probabilidad uno, o de forma equivalente, $N_j^n/n \to 1/m_j$ con probabilidad uno.
+
+    Ahora dejemos que $X_0$ tenga una distribución arbitraria, si $T_j < \infty$, entonces el argumento anterior es válido por la propiedad fuerte de Markov, y si $T_j = \infty$ entonces $N_j^n/n \to 0$. Así las cosas, hemos obtenido que con probabilidad uno se satisfará
+    \[
+        \lim_{n \to \infty} \frac{N_j^n} n = \frac{1}{m_j} \1_{\{T_j < \infty\}}.
+    \]
+    Para concluir notemos que para cada $n \geq 1$, $0 \leq N_j^n /n \leq 1$. Por el teorema \ref{teo:convaco},
+    \[
+        \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m = \lim_{n \to \infty} \EE\left[ \frac{N_j^n}n \,\bigg\vert\, X_0 = i\right] = \EE\left[ \frac 1 {m_j} \1_{\{T_j < \infty\}} \,\bigg\vert\, X_0 = i\right] = \frac{\rho_{ij}}{m_j}. \qedhere
+    \]
+\end{proof}
+
+Recoredemos que $\Cc \subset \Ee$ es una clase cerrada si para cualquier $i \in \Cc$ y cualquier $j \notin \Cc$, $P_{ij} = 0$. Además se dice que $\Cc$ es irreducible si $\rho_{ij} > 0$ para cualesquiera $i, j \in \Cc$. Un resultado de la primera parte de cadenas de Markov nos dice que si $\Cc$ es cerrado e irreducible, entonces todos los estados son transitorios o son recurrentes. De cualquier forma, tendremos el siguiente corolario directo del teorema \ref{teo:convergenciaprobacesaro}.
+
+\begin{corollary}
+    Sean $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$, y $\Cc \subset \Ee$ una clase cerrada. Entonces
+    \[
+        \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m = \frac{\rho_{ij}}{m_j}    
+    \] para cualesquiera $i, j \in \Cc$. Si además se tiene que $\PP(X_0 \in \Cc) = 1$ entonces
+    \[
+        \lim_{n \to \infty} \frac{N_j^n}{n} = \frac{1}{m_j},
+    \]
+    para toda $j \in \Cc$. En particular, si $\Cc$ es una clase cerrada de estados recurrentes, la conclusión se satisface con $\rho_{ij} = 1$ para cualquier par $i, j \in \Cc$.
+\end{corollary}
+
+Hasta ahora hemos clasificado los estados en recurrentes y transitorios. Es momento de hacer una subdivisión de los estados recurrentes, en los que son \emph{recurrentes positivos} y los que son \emph{recurrentes nulos}.
+
+\begin{definition}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Se dice que $j \in \Ee$ es \emph{recurrente nulo} si $m_j = \infty$ y que es \emph{recurrente positivo} si $m_j < \infty$.
+\end{definition}
+
+Observemos que esta definición junto al teorema \ref{teo:convergenciaprobacesaro} nos dicen que si $j \in \Ee$ es un estado recurrente nulo, entonces para cualquier $i \in \Ee$ se satisfará
+\[
+    \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m = 0.
+\]
+Esto que se acaba de deducir, así como el siguiente resultado, nos dan la pauta para fijarnos únicamente en los estados recurrentes positivos.
+
+\begin{proposition}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $\pi$ es una medida invariante, $\pi(j) = 0$ para todo estado $j \in \Ee$ transitorio o recurrente nulo.
+\end{proposition}
+
+\begin{proof}
+    Por ser $\pi$ una medida invariante, $\pi = \pi P^m$ para toda $m \in \NN$, en particular
+    \[
+        \pi(j) =  \sum_{i \in \Ee} \pi(i) P_{ij}^m.
+    \]
+    Sumando sobre $m \in \{1, \ldots, n\}$ y dividiento entre $n$ obtenemos 
+    \[
+        \pi(j) = \sum_{i \in \Ee} \pi(i) \left(\frac 1 n \sum_{m = 1}^n P_{ij}^m\right).
+    \]
+    Cuando $j \in \Ee$ es transitorio o recurrente nulo, por el teorema \ref{teo:convaco}, usando un argumento similar a la proposición \ref{prop:convergencia distribucion},
+    \[
+        \pi(j) = \lim_{n \to \infty} \sum_{i \in \Ee} \pi(i) \left(\frac 1 n \sum_{m = 1}^n P_{ij}^m\right) = \sum_{i \in \Ee} \pi(i) \left( \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij}^m\right) = 0. \qedhere
+    \]
+\end{proof}
+
+Ha llegado el momento de probar la existencia de distribuciones estacionarias para las cadenas de Markov irreducibles con estados recurrentes (positivos). Para poder probar este resultado, deberemos probar un par de lemas en el que usaremos las variables $\gamma_i^j$, definidas por
+\[
+    \gamma_i^j = \EE \left[\sum_{m = 0}^{T_j-1} \1_{\{X_m = i\}} \,\Bigg\vert\, X_0 = j \right],
+\]
+donde $i,j \in \Ee$. Notemos que $\gamma_i^j$ cuenta la cantidad esperada de veces que la cadena $\bm X$ está en el estado $i$ antes de regresar por primera vez al estado $j$.
+
+\begin{lemma} \label{lem:invarianza gamma}
+    Sea $\bm X$ una cadena de Markov irreducible y recurrente, con espacio de estados $\Ee$ y matriz de transici´ón $P$. Entonces se cumplirán:
+    \begin{enumerate}
+        \item $\gamma_j^j = 1$ para toda $j \in \Ee$.
+        \item Para cada $j \in \Ee$, $\gamma^j = \{\gamma_i^j : i \in \Ee\}$, representado como  vector renglón, satisface $\gamma^j = \gamma^j P$.
+        \item $0 < \gamma_i^j < \infty$ para cualesquiera $i, j \in \Ee$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Notemos que para $1 \leq n < T_j$, $\1_{\{X_n = 0\}}$, por lo que
+    \[
+        \gamma_j^j = \EE[\1_{\{X_0 = j\}} \,\vert\, X_0 = j] = 1,    
+    \]
+    probando (1). 
+    
+    Supongamos que (2) es verdadero y probemos (3). Como $\bm X$ es irreducible, para cualquier par de estados $i, j \in \Ee$ existen $n, m \in \NN$ tales que $P_{ij}^n, P_{ji}^m > 0$. De (2), $\gamma_i^j \geq \gamma_j^j P_{ji}^m$ y $\gamma_i^j P_{ij}^n \leq \gamma_j^j$. Por (1), $\gamma_j^j = 1$ y por lo tanto
+    \[
+        0 < P_{ji}^m \leq \gamma_i^j \leq \frac 1 {P_{ij}^n} < \infty,    
+    \]
+    lo que prueba (3). Así las cosas, concluiremos la demostración si logramos probar (2).
+
+    Ahora observemos que para $n \geq 1$, $n \leq T_j$ si y sólo si $X_1, \ldots, X_{n-1} \neq j$, por lo que para cada $k \in \Ee$ y cada $i \in \Ee$, por la propiedad de Markov y homogeneidad,
+    \[
+        \PP(X_{n-1} = k, X_n = i, n \leq T_j \,\vert\, X_0 = j) = \PP(X_{n-1} = k, n \leq T_j \,\vert\, X_0 = j) P_{ki},
+    \]
+    donde esto último es igual a cero si $k = j$. Como $j$ es recurrente, condicionado a $X_0 = j$, $T_j < \infty$ y $X_0 = X_{T_j} = j$ con probabilidad uno, lo que en particular implica, condicional en $X_0 = j$, que 
+    \[
+        \sum_{n = 0}^{T_j - 1} \1_{\{X_n = i\}} = \sum_{n = 1}^{T_j} \1_{\{X_n = i\}}
+    \]
+    se satisface para cualquier $i \in \Ee$. Notemos además que
+    \[
+        \sum_{n = 1}^{T_j} \1_{\{X_n = i\}} = \sum_{n = 1}^\infty \1_{\{X_n = i, n \leq T_j\}}
+    \]
+    mientras que
+    \[
+        \sum_{n = 0}^{T_j - 1} \1_{\{X_n = i\}} = \sum_{n = 0}^\infty \1_{\{X_n = i, n \leq T_j - 1\}}    
+    \]
+    para cualesquiera $i, j \in \Ee$. Por lo tanto,
+    \begin{align*}
+        \gamma_i^j & %= \EE \left[\sum_{n = 1}^{T_j} \1_{\{X_n = i\}} \,\Bigg\vert\, X_0 = j \right] 
+        = \EE \left[\sum_{n = 1}^{\infty} \1_{\{X_n = i, n \leq T_j\}} \,\Bigg\vert\, X_0 = j \right] \\
+        & = \sum_{n = 1}^\infty \PP(X_n = i, n \leq T_j \,\vert\, X_0 = j) \\
+        & = \sum_{n = 1}^\infty \sum_{k \in \Ee} \PP(X_{n-1} = k, X_n = i, n \leq T_j \,\vert\, X_0 = j) \\
+        & = \sum_{n = 1}^\infty \sum_{k \in \Ee} \PP(X_{n-1} = k, n \leq T_j \,\vert\, X_0 = j) P_{ki} \\
+        & = \sum_{k \in \Ee} P_{ki} \sum_{n = 1}^\infty \PP(X_{n-1} = k, n \leq T_j \,\vert\, X_0 = j) \\
+        & = \sum_{k \in \Ee} P_{ki} \sum_{m = 0}^\infty \PP(X_m = k, m \leq T_j - 1 \,\vert\, X_0 = j) \\
+        & = \sum_{k \in \Ee} P_{ki} \EE \left[\sum_{m = 0}^{\infty} \1_{\{X_m = i, m \leq T_j - 1\}} \,\Bigg\vert\, X_0 = j \right] \\%= \sum_{k \in \Ee} P_{ki} \EE \left[\sum_{m = 0}^{T_j - 1} \1_{\{X_m = i\}} \,\Bigg\vert\, X_0 = j \right] \\
+        & = \sum_{k \in \Ee} P_{ki} \gamma_k^i,
+    \end{align*}
+    donde los intercambios entre sumas y sumas y esperanzas son consecuencia del teorema \ref{teo:convmon}. Como eso se satisface para toda $i \in \Ee$, se sigue que $\gamma^j = \gamma^j P$, probando (2).
+\end{proof}
+
+\begin{lemma} \label{lem:desigualdad gamma}
+    Sea $\bm X$ una cadena de Markov irreducible, con espacio de estados $\Ee$ y matriz de transici´ón $P$. Si $\pi$ es una medida invariante tal que $\pi(j) = 1$ para alguna $j \in \Ee$, entonces $\pi \geq \gamma^j$, donde la desigualdad se entiende entrada a entrada. Si además $\bm X$ es recurrente, entonces $\pi = \gamma^j$.
+\end{lemma}
+
+\begin{proof}
+    Para cada $i \in \Ee$ y cada $n \geq 1$, por ser $\pi$ una medida invariante tal que $\pi(j) = 1$,
+    \begin{align*}
+        & \sum_{k \neq j} \pi(k) \PP(X_n = i, n \leq T_j \,\vert\, X_0 = k) \\ 
+        & \quad = \sum_{k \neq j} \left(\sum_{l \in \Ee} \pi(j) P_{lk} \right) \PP(X_n = i, n \leq T_j \,\vert\, X_0 = k) \\
+        & \quad = \sum_{k \neq j} P_{jk} \PP(X_n = i, n \leq T_j \,\vert\, X_0 = k) + \sum_{k \neq j} \sum_{l \neq j} \pi(l) P_{lk} \PP(X_n = i, n \leq T_j \,\vert\, X_0 = k) \\
+        & \quad = \sum_{k \neq j} P_{jk} \PP(X_{n+1} = i, n+1 \leq T_j \,\vert\, X_1 = k) \\
+        & \qquad + \sum_{l \neq j} \pi(l) \sum_{k \neq j} P_{lk} \PP(X_{n+1} = i, n+1 \leq T_j \,\vert\, X_1 = k) \\
+        & \quad = \PP(X_{n+1} = i, n+1 \leq T_j \,\vert\, X_0 = j) + \sum_{l \neq j} \pi(l) \PP(X_{n+1} = i, n+1 \leq T_j \,\vert\, X_0 = l),
+    \end{align*}
+    donde se ha usado la homogeneidad de $\bm X$ en la tercera igualdad. 
+
+    Ahora observemos que para $i \in \Ee$ fijo, por ser $\pi$ una medida invariante con $\pi(j) = 0$,
+    \begin{align*}
+        \pi(i) & = \sum_{k \in \Ee} \pi(k) P_{ki} = P_{ji} + \sum_{k \neq j} \pi(k) P_{ki} \\
+        & = \PP(X_1 = i, 1 \leq T_j \,\vert\, X_0 = j) + \sum_{k \neq j} \pi(k) \PP(X_1 = i, 1 \leq T_j \,\vert\, X_0 = k).
+    \end{align*}
+    Luego entonces, juntando las igualdades se obtiene fácilmente que para toda $n \geq 1$,
+    \begin{align*}
+        \pi(i) & = \sum_{m = 1}^n \PP(X_m = i, m \leq T_j \,\vert\, X_0 = j) + \sum_{k \neq j} \pi(k) \PP(X_{n+1} = i, n+1 \leq T_j \,\vert\, X_0 = k) \\
+        & \geq \sum_{m = 1}^n \PP(X_m = i, m \leq T_j \,\vert\, X_0 = j) = \EE \left[\sum_{m = 1}^n \1_{\{X_m = i, m \leq T_i\}} \,\Bigg\vert\, X_0 = j \right].
+    \end{align*}
+    Así pues, por el teorema \ref{teo:convmon} tendremos que 
+    \[
+        \pi(i) \geq \lim_{n \to \infty } \EE \left[\sum_{m = 1}^n \1_{\{X_m = i, m \leq T_j\}} \,\Bigg\vert\, X_0 = j \right] = \EE \left[\sum_{m = 1}^\infty \1_{\{X_m = i, m \leq T_j\}} \,\Bigg\vert\, X_0 = j \right] = \gamma_i^j.
+    \]
+    Por lo tanto $\pi \geq \gamma^j$.
+
+    Ahora supongamos que $\bm X$ es recurrente, por el lema \ref{lem:invarianza gamma} $\gamma^j$ es una medida invariante. Por lo que acabamos de probar, $\mu = \pi - \gamma^j$ es también una medida invariante. En efecto, $\mu \geq 0$ pues $\pi \geq \gamma^j$ y $\mu P = (\pi - \gamma^j) P = \pi P - \gamma^j P = \pi - \gamma^j = \mu$. Por ser $\bm X$ irreducible, para cada $i \in \Ee$ existe $n \in \NN$ tal que $P_{ij}^n > 0$ y así 
+    \[
+        \mu(j) = \sum_{k \in \Ee} \mu(k) P_{kj}^n \geq \mu(i) P_{ij}^n.
+    \]
+    Como $\mu(j) = 0$ se sigue que $\mu(i) = 0$, o de forma equivalente $\pi(i) = \gamma_i^j$.
+\end{proof}
+
+Ahora sí, el teoremón de la sección, en el que probamos la existencia ---y unicidad--- para cadenas de Markov irreducibles con estados recurrentes positivos.
+
+\begin{theorem}\label{teo:existencia distribucion estacionaria}
+    Sea $\bm X$ una cadena de Markov irreducible, con espacio de estados $\Ee$ y matriz de transición $P$. Los siguientes enunciados son equivalentes:
+    \begin{enumerate}
+        \item Todo estado de $\Ee$ es recurrente positivo.
+        \item Existe $j \in \Ee$ recurrente positivo.
+        \item $\bm X$ tiene una distribución estacionaria $\pi$. 
+    \end{enumerate}
+    Más aún, $\pi(j) = 1/m_j$ para toda $j \in \Ee$.
+\end{theorem}
+
+\begin{proof}
+    Que (1) implica (2) es evidente. Supongamos entonces que (2) se cumple y probemos (3). Como $j \in \Ee$ es recurrente y $\bm X$ es irreducible, $\bm X$ es recurrente y por el lema \ref{lem:invarianza gamma}, $\gamma^j$ es invariante y
+    \begin{align*}
+        \sum_{i \in \Ee} \gamma_i^j & = \sum_{i \in \Ee} \EE \left[\sum_{n = 1}^{T_j} \1_{\{X_n = i\}} \,\Bigg\vert\, X_0 = j \right] = \EE \left[\sum_{n = 1}^{T_j} \sum_{i \in \Ee} \1_{\{X_n = i\}} \,\Bigg\vert\, X_0 = j \right] \\
+        & = \EE \left[\sum_{n = 1}^{T_j} \1_{\{X_n \in \Ee\}} \,\Bigg\vert\, X_0 = j \right] = \EE[T_j \,\vert\, X_0 = j] = m_j,
+    \end{align*}
+    de donde $\sum_{i \in \Ee} \gamma_i^j = m_j < \infty$, pues $j \in \Ee$ es recurrente positivo. Entonces $\pi = \gamma^j / m_j$ es claramente una distribución estacionaria.
+
+    Finalmente, supongamos que (3) es verdadera y demostremos (1). Notemos que existe $j \in \Ee$ tal que $\pi(j) > 0$, pues $\sum_{i \in \Ee} \pi(i) = 1$. Fijemos $i \in \Ee$, por ser $\bm X$ irreducible, para  existe $n \in \NN$ tal que $P_{ji}^n > 0$ y por ser $\pi$ estacionaria, $\pi(i) = \sum_{k \in \Ee} \pi(k) P_{ki}^n \leq \pi(j) P_{ji}^n > 0$. Definamos una nueva medida estacionaria $\mu = \pi / \pi(i)$ y notemos qeu $\mu(i) = 1$, por lo que $\mu \geq \gamma^i$ por el lema \ref{lem:desigualdad gamma}. Por lo tanto,
+    \begin{equation}
+        m_i = \sum_{k \in \Ee} \gamma_k^i \leq \sum_{k \in \Ee} \frac{\pi(k)}{\pi(i)} = \frac{1}{\pi(i)} < \infty, \label{eq:desigualdad gamma aplicada}
+    \end{equation}
+    donde la última igualdad se da por ser $\pi$ distribución estacionaria.
+
+    Con esto hemos probado la equivalencia de (1), (2) y (3). Para finalizar la demostración, notemos que bajo cualquiera de los enunciados, $\bm X$ es recurrente y por el lema \ref{lem:desigualdad gamma}, la desigualdad en (\ref{eq:desigualdad gamma aplicada}) es de hecho una igualdad.
+\end{proof}
+
+Después de un teorema de tal importancia, ahora nos podemos concentrar en dar consecuencias de éste. Recordemos que si $\Cc \subset \Ee$ es una clase cerrada e irreducible, entonces se dice que es transitoria si todos sus estaos son transitorios y es recurrente si todos sus estados son recurrentes. Ahora refinaremos esta última clasificación y diremos que $\Cc$ es recurrente nula si todos sus estados son recurrentes nulos y que es recurrente positiva si todo $j \in \Cc$ es recurrente positivo. 
+
+\begin{corollary}
+    Sea $\bm X$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $\Cc \subset \Ee$ es cerrada e irreducible, entonces $\Cc$ es transitoria, recurrente nula o recurrente positiva.
+\end{corollary}
+
+\begin{proof}
+    Sabemos $\Cc$ es o transitoria o recurrente. Supongamos que $\Cc$ es recurrente y que $X_0 \in \Cc$ con probabilidad 1, por lo que podemos pensar en $\bm X$ como una cadena de Markov con espacio de estados $\Cc$. Así, por el teorema \ref{teo:existencia distribucion estacionaria}, si existe un estado $j \in \Cc$ recurrente positivo, $\Cc$ es recurrente positiva y en caso contrario $\Cc$ es recurrente nula.
+\end{proof}
+
+Asimismo, si $\bm X$ es una cadena de Markov irreducible, se dirá que es transitoria, recurrente nula o recurrente positiva si $\Ee$ es transitoria, recurrente nula o recurrente positiva. Algo que resulta sorprendente es que solamente es necesario ver la transitoriedad o tipo de recurrencia de un único estado en $j \in \Ee$ para clasificar la cadena.
+
+\begin{corollary}
+        Sea $\bm X$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $\Cc \subset \Ee$ es cerrada, irreducible y finita, $\Cc$ es recurrente positiva.
+\end{corollary}
+
+\begin{proof}
+    Notemos que por ser una clase cerrada y finita, para cada $i \in \Cc$,
+    \[
+        \sum_{j \in \Cc} P_{ij}^m = 1.
+    \]
+    Sumando sobre $m \in \{1, \ldots, n\}$ y dividiendo entre $n$, para cada $i \in \Cc$,
+    \[
+        \sum_{j \in \Cc} \frac 1 n \sum_{m = 1}^n P_{ij}^m = 1.    
+    \]
+    Por el teorema \ref{teo:convergenciaprobacesaro}, cuando $n \to \infty$,
+    \[
+        \sum_{j \in \Cc} \frac 1 {m_j} = 1, 
+    \]
+    de donde debe existir $k \in \Cc$ tal que $1/m_k > 0$ o bien $m_k < \infty$. Por el teorema \ref{teo:existencia distribucion estacionaria} $\Cc$ es recurrente positiva.
+\end{proof}
+
+Ahora damos una serie de resultados inmediatios ---por lo que se omiten las pruebas--- que serán de utilidad más adelante.
+
+\begin{corollary}
+    Sea $\bm X$ una cadena de Markov irreducible con espacio de estados $\Ee$ finito y matriz de transición $P$, entonces $\bm X$ es recurrente positiva.
+\end{corollary}
+
+\begin{corollary}
+    Una cadena de Markov $\bm X$ con una cantidad finita de estados no tiene estados recurrentes nulos.
+\end{corollary}
+
+\begin{corollary}
+    Una cadena de Markov $\bm X$ irreducible es recurrente positiva si y sólo si tiene distribución estacionaria.
+\end{corollary}
+
+\begin{corollary}
+    Una cadena de Markov $\bm X$ irreducible, con espacio de estados $\Ee$ finito, tiene distribución estacionaria única.
+\end{corollary}
+
+\begin{corollary}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov irreducible y recurrente positiva, con espacio de estados $\Ee$ y matriz de transición $P$. Entonces
+    \[
+        \lim_{n \to \infty} \frac{N_j^n}{n} = \pi(j)    
+    \] con probabilidad uno para cada $j \in \Ee$.
+\end{corollary}
+
+El último corolario resulta de importante a la hora de simular cadenas de Markov irreducibles y recurrentes positivas puesto que se pueden simular los primeros $n$ pasos de la cadena y, si $n$ es suficientemente grande, podremos aproximar $\pi(j)$ para toda $j \in \Ee$ por medio de $N_j^n / n$, incluso si $\Ee$ no es finito. ¿Y qué pasa si una cadena no es irreducible? Para poder responder esto, consideremos una clase $\Cc \subset \Ee$ y una distribución inicial $\pi$ para una cadena de Markov $\bm X$. Diremos que $\pi$ es concentra en $\Cc$ si 
+\[
+    \pi(j) = 0
+\]
+para toda $j \notin \Cc$. Si además $\Cc$ es cerrada e irreducible, por el mismo argumento que el teorema \ref{teo:existencia distribucion estacionaria} tendremos el siguiente resultado.
+
+\begin{theorem} \label{teo:distribucion estacionaria reducible}
+    Sea $\bm X$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $\Cc \subset \Ee$  es cerrada, irreducible y positiva recurrente, entonces $\bm X$ tiene una única distribución estacionaria $\pi$, concentrada en $\Cc$, dada por
+    \[
+        \pi(j) = \frac 1 {m_j} \1_{\Cc}(j) = \begin{cases}
+            1/m_j & \text{ si } j \in \Cc,\\
+            0 & \text{ en otro caso}.
+        \end{cases}
+    \]
+\end{theorem}
+
+Así pues, si $\Cc_1$ y $\Cc_2$ son dos clases cerradas, irreducibles y recurrente positivas ajenas, por el teorema \ref{teo:distribucion estacionaria reducible} existirán dos distribuciones estacionarias $\pi^1$ y $\pi^2$ concentradas en $\Cc_1$ y $\Cc_2$. Entonces 
+\[
+    \pi^\alpha = \alpha \pi^1 + (1- \alpha) \pi^2
+\]
+es una distribución estacionaria para cada $\alpha \in [0,1]$, por lo que en este caso, no tendremos una distribución estacionaria única.
+
+\begin{example}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ la cadena de Markov con espacio de estados $\Ee = \{0,1\}$ y probabilidades de transición $P_{00} = P_{11} = 1$. Entonces $\Cc_0 = \{0\}$ y $\Cc_1 = \{1\}$ son clases cerradas irreducibles y, por ser finitas, recurrentes positivas. En el ejemplo \ref{ej:vaquero 2 estados} deducimos que $\pi^0 = (1,0)$ y $\pi^1 = (0,1)$ eran distribuciones estacionarias para $\bm X$, las cuales podemos observar que están concentradas en $\Cc_0$ y $\Cc_1$ de forma respectiva. Ahora podemos asegurar que son las únicas que satisfacen esta condición y por lo tanto, todas las distribuciones estacionarias de la cadena están dadas por $\pi^\alpha = (\alpha, 1 - \alpha)$ para $\alpha \in [0,1]$.
+\end{example}
+
+Para finalizar la sección, daremos un resultado en el cual resumimos la existencia y unicidad de distribuciones estacionarias para cadenas de Markov.
+
+\begin{proposition}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Sea $\Ee_P \subset \Ee$ el conjunto de estados recurrentes positivos. Entonces se cumple uno y sólo uno de los siguientes incisos:
+    \begin{enumerate}
+        \item Si $\Ee_P = \varnothing$ entonces la cadena $\bm X$ no tiene distribuciones estacionarias.
+        \item Si $\Ee_P \neq \varnothing$ es irreducible entonces existe una única distribución estacionaria para $\bm X$.
+        \item Si $\Ee_P \neq \varnothing$ no es irreducible entonces existe una colección infinita de distribuciones estacionarias para $\bm X$.
+    \end{enumerate}
+\end{proposition}
+
+Queda pendiente el estudiar el comportamiento asintótico de $P_{ij}^n$ para ciertas cadenas de Markov, antes de estudiar obtendremos las distribuciones estacionarias para algunas cadenas de Markov, especificando cuándo son únicas y cuándo no lo son.

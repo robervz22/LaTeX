@@ -1,0 +1,290 @@
+\section{Convergencia a la distribución estacionaria}
+
+\noindent En la sección \ref{sec:existencia}, vimos que si $\bm X$ es una cadena de Markov irreducible y positiva recurrente, con distribución estacionaria $\pi$, entonces para cualesquiera $i, j \in \Ee$,
+\[
+    \lim_{n \to \infty} \frac 1 n \sum_{m = 1}^n P_{ij} = \pi(j) = \frac 1 {m_j}.
+\]
+Ahora estudiaremos el comportamiento de $P_{ij}^n$ cuando $n \to \infty$. En la proposición vimos que si el espacio de estados es finito y el límite existe para alguna $i \in \Ee$ y toda $j \in \Ee$ entonces debe ser una distribución estacionaria. Aquí veremos una refinación de ese resultado, cuando es que
+\[
+    \lim_{n \to \infty} P_{ij}^n = \pi(j)
+\]
+se satisface para cualesquiera $i, j \in \Ee$ y qué pasa cuando este límite no existe, restringiéndonos a cadenas irreducibles y recurrentes positivas. Veamos que, en efecto, el límite puede no existir.
+
+\begin{example} \label{ej:vaquerito}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee = \{0,1\}$ y matriz de transición 
+    \[
+        P = \begin{pmatrix}
+            0 & 1 \\ 1 & 0
+        \end{pmatrix}.
+    \]
+    Es claro que 
+    \[
+        P^n = \begin{cases}
+            P & \text{ si } n \text{ es impar}, \\
+            \Id & \text{ si } n \text{ es par},
+        \end{cases}    
+    \] donde $\Id$ es la matriz identidad. Así, $\lim_{n \to \infty} P_{ij}^n$ no existe. Sin embargo, observemos que tanto $\lim_{n \to \infty} P_{ij}^{2n}$ como $\lim_{n \to \infty} P_{ij}^{2n+1}$ sí existen para cualesquiera $i, j \in \Ee$. 
+\end{example}
+
+El ejemplo anterior da pauta para la siguiente definici´on.
+
+\begin{definition}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Si $i \in \Ee$ es tal que exista $n \geq 1$ tal que $P_{ii}^n > 0$, se define su \emph{perído} como
+    \[
+        d_i = \mcd \{n \geq 1 : P_{ii}^n > 0\}.
+    \]
+    Si $d_i = 1$ se dice que $i$ es \emph{aperiódico}.
+\end{definition}
+
+Regresando al ejemplo \ref{ej:vaquerito}, vemos que $P_{ii}^{2n} = 1$ y que $P_{ii}^{2n+1} = 0$, por lo que el período de cada uno de los estados es $2$. Por otra parte, no es difícil convencerse de que todo estado absorbente es aperiódico. Ahora veremos que la periodicidad es una propiedad de clase.
+
+\begin{proposition}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de transición $P$. Sean $i \in Ee$ y $j \in \Ee$ tales que $P_{ii}^n, P_{jj}^m > 0$ para algunas $n,m \geq 1$. Si $\rho_{ij}, \rho_{ji} > 0$, entonces $d_i = d_j$.
+\end{proposition}
+
+\begin{proof}
+    Como $\rho_{ij}, \rho_{ji} > 0$ existen $n_1, n_2 \geq 1$ tales que $P_{ij}^{n_1}, P_{ji}^{n_2} > 0$. Entonces, por Chapman--Kolmogorov,
+    \[
+        P_{ii}^{n_1+n_2} = \sum_{k \in \Ee} P_{ik}^{n_1} P_{ki}^{n_2} \geq P_{ij}^{n_1} P_{ji}^{n_2} > 0,
+    \]
+    de donde $d_i$ es divisor de $n_1+n_2$. Ahora supongamos que $m$ es tal que $P_{jj}^m > 0$, entonces, nuevamente por Chapman--Kolmogorov,
+    \[
+        P_{ii}^{n_1+m+n_2} \geq P_{ij}^{n_1} P_{jj}^m P_{ji}^{n_2} > 0,
+    \]
+    por lo que $d_i$ divide a $(n_1 + n_2) + m$ y, como $d_i$ también divide a $n_1 + n_2$, concluimos que $d_i$ divide a $m$. Por lo tanto, $d_i$ es divisor de todos los números en el conjunto 
+    \[
+        \{m \geq 1 : P_{jj}^m > 0\},
+    \] y por definición $d_j$ es el máximo de los divisores de tal conjunto. Luego, $d_i \leq d_j$. De forma similar se deduce que $d_j \leq d_i$, por lo que $d_i = d_j$.
+\end{proof}
+
+En particular hemos obtenido que si $\Cc \subset \Ee$ es una clase irreducible de estados, entonces todos los estados en la clase $\Cc$ tienen el mismo período $d$. Cuando $d = 1$, se dice que la clase es \emph{aperiódica}. Más aún, si $\Cc = \Ee$ entoces $\bm X$ será irreducible y, por lo tanto, todos sus estados tendrán el mismo período $d$. En este caso diremos que $\bm X$ es una cadena de período $d$ si $d > 1$ y diremos que es una cadena \emph{aperiódica} si $d = 1$.
+
+\begin{example}
+    Consideremos una cadena de rachas con $p \in (0,1)$, la cual es irreducible. Por hipótesis, $P_{00} = 1 - p > 0$, por lo que $d_0 = 1$. Así pues, la cadena de rachas resulta ser aperiódica.
+\end{example}
+
+\begin{example}
+    Consideremos la cadena de Ehrenfest. Es fácil convencerse de que $P_{ii}^{2n+1} = 0$ para cualquier $n \in \NN$ mientras que $P_{ii}^{2n} > 0$ para toda $n \geq 1$, de donde el período de la cadena de Ehrenfest es 2.
+\end{example}
+
+Ahora veremos que, si tenemos una cadena irreducible, aperiódica y recurrente positiva, entonces su comportamiento asintótico será ``ideal'' y veremos lo que sucede para cadenas irreducibles y recurrentes positivas pero con período $d > 1$. La técnica con la que se demostrará el teorema es conocida como \emph{acoplamiento}, en la que la idea general es comparar el comportamiento de dos procesos estocásticos $\bm X$ y $\bm Y$ construyendo copias $\tilde X$ y $\tilde Y$ de estos procesos en un espacio de probabilidad común. Las pruebas que usan la técnica de acoplamiento suelen ser transparentes y simples.
+
+\begin{theorem} \label{teo:convergencia distribucion estacionaria}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov irreducible, recurrente positiva, con distribución estacionaria $\pi$ y distribución inicial $\mu$. Si la cadena es aperiódica, entonces 
+    \begin{equation}
+        \lim_{n \to \infty} \PP(X_n = j) = \pi(j) \label{eq:convergencia dist a est 1}
+    \end{equation}
+    para toda $j \in \Ee$. En particular
+    \begin{equation}
+        \lim_{n \to \infty} P_{ij}^n = \pi(j) \label{eq:convergencia trans a est 1}
+    \end{equation}
+    para cualesquiera $i, j \in \Ee$.
+
+    Si la cadena tiene período $d > 1$, entonces para cada $i \in \Ee$ y cada $j \in \Ee$ existe un entero $r \in \{0, 1, \ldots, d-1\}$ tal que 
+    \begin{equation}
+        \lim_{n \to \infty} P_{ij}^{nd+r} = d\pi(j). \label{eq:convergencia trans a est 2}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    \textbf{Caso aperiódico.} Sea  $\bm Y = \{Y_n\}_{n \in \NN}$ una cadena de Markov, irreducible, recurrente positiva, con distribución inicial $\pi$ e independiente\footnote{Esto nos dice que $\bm X$ y $\bm Y$ están definidas en el mismo espacio de probabilidad.} de $\bm X$ tal que $\PP(Y_1 = j \,\vert\, Y_0 = i) = \PP(X_1 = j \,\vert\, X_0 = i) = P_{ij}$ para cualesquiera $i,j \in \Ee$. Fijemos $k \in \Ee$ y definamos
+    \[
+        \tau = \inf\{n \geq 1 : X_n = Y_n = k\},    
+    \]
+    la primera vez que ambas cadenas son iguales a $k$.
+
+    \emph{Paso 1.} Mostraremos que $\PP(\tau < \infty) = 1$. Con este fin en mente definamos $Z_n = (X_n, Y_n)$ para toda $n \in \NN$. Entonces $\bm Z = \{Z_n\}_{n \in \NN}$ es una cadena de Markov con espacio de estados $\Ee \times \Ee$, probabilidades de transición
+    \[
+        P_{(i,i')(j,j')} = P_{ij} P_{i'j'}
+    \] y distribución inicial $\lambda$ dada por 
+    \[
+        \lambda(i,i') = \mu(i) \pi(i).    
+    \]
+    Como $\bm X$ es aperiódica, $\bm Y$ también lo es y consecuentemente $\bm Z$ es aperiódica. Más aún, $\bm Z$ es irreducible, pues $P_{(i,i')(j,j')}^n = P_{ij}^n P_{i'j'}^n$ para toda $n \in \NN$. Finalmente observamos que $\bm Z$ tiene distribución estacionaria $\tilde \pi$ dada por 
+    \[
+        \tilde \pi (i,i') = \pi(i) \pi(i'),
+    \]
+    entonces, por el teorema \ref{teo:existencia distribucion estacionaria}, $\bm Z$ es recurrente positiva. Entonces $\tau$ es la primera vez que $\bm Z$ visita el estado $(k,k)$ y, por lo tanto
+    \[
+        \PP(\tau < \infty) = \sum_{(i,i') \in \Ee \times \Ee} \PP(\tau < \infty \,\vert\, Z_0 = (i,i')) \lambda(i,i') = \sum_{(i,i') \in \Ee \times \Ee} \lambda(i,i') = 1,
+    \]
+    donde la segunda igualdad se da por ser $\bm Z$ irreducible y recurrente.
+
+    \emph{Paso 2.} Probaremos que para $n \geq 1$ y para $j \in \Ee$ se cumple
+    \begin{equation}
+        \PP(X_n = j, \tau \leq n) = \PP(Y_n = j, \tau \leq n). \label{eq:igualdad despues paro}
+    \end{equation}
+    En efecto, para $m \in \{1, \ldots, n\}$, 
+    \[
+        \PP(X_n = j \,\vert\, \tau = m, X_m = Y_m = k) = P_{kj}^{n-m} = \PP(Y_n = j \,\vert\, \tau = m, X_m = Y_m = k),
+    \]
+    y como $\{\tau \leq n\} = \bigcup_{m = 1}^n \{\tau_m, X_m = Y_m = k\}$, por el ejercicio 4 del capítulo 1 de \cite{Hoel72},
+    \[
+        \PP(X_n = j \,\vert\, \tau \leq n) =  \PP(Y_n = j \,\vert\, \tau \leq n).
+    \] Consecuentemente (\ref{eq:igualdad despues paro}) se satisface.
+    
+    \emph{Paso 3.} Demostraremos el teorema para el caso aperiódico. Por (\ref{eq:igualdad despues paro}) tendremos que
+    \begin{align*}
+        \PP(X_n = j) & = \PP(X_n = j, \tau \leq n) + \PP(X_n = j, \tau > n) \\
+        & = \PP(Y_n = j, \tau \leq n) + \PP(X_n = j, \tau > n) \\
+        & \leq \PP(Y_n = j) + \PP(\tau > n).
+    \end{align*}
+    De manera análoga
+    \[
+        \PP(Y_n = j) \leq \PP(X_n = j) + \PP(\tau > n).
+    \]
+    Así pues, para $n \geq 1$ se cumplirá que
+    \[
+        \abs{\PP(X_n = j) - \PP(Y_n = j)} \leq \PP(\tau > n)
+    \]
+    para cualquier $j \in \Ee$. Por hipótesis $\pi$ es la distribución inicial y estacionaria de $\bm Y$, de donde $\PP(Y_n = j) = \pi(j)$ y además $\tau < \infty$ casi seguramente. Así las cosas, 
+    \[
+        \limsup_{n \to \infty} \abs{\PP(X_n = j) - \pi(j)} \leq \lim_{n \to \infty} \PP(\tau > n) = \PP(\tau = \infty) = 0,
+    \] de donde se deduce que
+    \[
+        \lim_{n \to \infty} \PP(X_n = j) = \pi(j)
+    \] se satisface para cualquier $j \in \Ee$, demostrando (\ref{eq:convergencia dist a est 1}). En particular (\ref{eq:convergencia trans a est 1}) se satisface cuando consideramos $\mu$ dada por
+    \[
+        \mu(k) = \begin{cases}
+            1 & \text{ si } k = i,\\
+            0 & \text{ en otro caso}.
+        \end{cases}
+    \]
+    Esto prueba el resultado en el caso aperiódico.
+
+    \textbf{Caso periódico.} \emph{Paso 1.} Extenderemos el resultado del caso aperiódico como sigue: Consideremos $\Cc \subset \Ee$ cerrada, irreducible, aperiódica y recurrente positiva y sea $\pi^\Cc$ la única distribución estacionaria concentrada en $\Cc$. Si $\PP(X_0 \in \Cc) = 1$ podemos pensar en que $\bm X$ es una cadena con espacio de estados $\Cc$ y por el caso aperiódico,
+    \[
+        \lim_{n \to \infty} \PP(X_n = j) = \pi^\Cc(j) = \frac 1 {m_j}.
+    \]
+    para toda $j \in \Cc$, en particular si $j$ es un estado recurrente aperiódico, 
+    \begin{equation}
+        \lim_{n \to \infty} P_{jj}^n = \frac 1 {m_j}. \label{eq:convergencia chula}
+    \end{equation}
+
+    \emph{Paso 2.} Probaremos que para $i = j \in \Ee$, (\ref{eq:convergencia trans a est 2}) se satisface con $r = 0$. Sea entonces $\bm Y = \{Y_n\}_{n \in \NN}$, donde $Y_n = X_{nd}$, una cadena de Markov con matriz de transición $Q = P^d$. Para $j \in \Ee$, 
+    \begin{align*}
+        \mcd \{m \geq 1 : Q_{jj}^m > 0\} = \mcd \{m \geq 1 : P_{jj}^{md} > 0\} = d^{-1} \mcd\{n \geq 1 : P_{jj}^n > 0\} = 1,
+    \end{align*}
+    es decir $j \in \Ee$ es aperiódico. Por otra parte tenemos que $\PP(T_j = m \,\vert\, X_0 = j) = 0$ para toda $m \neq nd$, con $n \geq 1$, donde $T_j = \inf\{n \geq 1 : X_n = j\}$; además, condicional en $X_0 = j$, $T_j = nd$ si y sólo si $T_j' = n$, donde $T_j' = \inf\{n \geq 1 : Y_n = j\}$, por lo que 
+    \begin{align*}
+        m_j = \EE[T_j \,\vert\, X_0 = j] & = \sum_{n = 1}^\infty nd \PP(T_j = nd \,\vert\, X_0 = j) \\
+        & = d \sum_{n = 1}^\infty n \PP(T_j' = n \,\vert\, Y_0 = j) = d\EE[T_j' \,\vert\, Y_0 = j],
+    \end{align*}
+    y de esta forma, por (\ref{eq:convergencia chula}),
+    \[
+        \lim_{n \to \infty} P_{jj}^{nd} = \lim_{n \to \infty} Q_{jj}^n = \frac{d}{m_j} = d\pi(j).
+    \]
+
+    \emph{Paso 3.} Para finalizar demostraremos que (\ref{eq:convergencia trans a est 2}) se satisface en general. Así, sean $i, j \in \Ee$ cualquier par de estados y sea 
+    \[
+        r_1 = \inf\{n \geq 1 : P_{ij}^n > 0\}.    
+    \]
+    Sea $n_1$ tal que $P_{ji}^{n_1} > 0$, por Chapman--Kolmogorov, 
+    \[
+        P_{jj}^{n_1+r_1} \geq P_{ji}^{n_1} P_{ij}^{r_1} > 0,
+    \]
+    por lo que $d$ divide a $n_1+r_1$. De forma similar, si $n \geq 1$ es tal que $P_{ij}^n > 0$, $d$ dividirá a $n_1+n$ y, por lo tanto $n-r_1 = m_1d$ para alguna $m_1 \in \NN$. Además existen $m_2 \in \NN$ y $r \in \{0, 1,\ldots, d-1\}$ únicas tales que $r_1 = m_2 d + r$, por lo que si $P_{ij}^n > 0$ entonces $n = md + r$ para alguna $m \in \NN$. Es ahora claro que
+    \[
+        P_{ij}^{md+r} = \sum_{k = 0}^m \PP(T_j = kd+r \,\vert\, X_0 = i) P_{jj}^{(m-k)d} = \EE[\xi_m],
+    \]
+    donde $\xi_m$ toma el valor $P_{jj}^{(m-k)d}$, con $k \in \{0, \ldots, m\}$, con probabilidad 
+    \[
+        \PP(T_j = kd+r \,\vert\, X_0 = i)
+    \] y $\xi_m = 0$ con probabilidad $\PP(T_j > md + r \,\vert\, X_0 = i)$. Fijemos $k \in \NN$ y notemos que 
+    \[
+        \lim_{m \to \infty} P_{jj}^{(m-k) d} = d\pi(j), 
+    \] 
+    por lo que 
+    \begin{align*}
+        \PP \left(\lim_{m \to \infty} \xi_m = d\pi(j)\right) & = 1 - \PP \left(\lim_{m \to \infty} \xi_m = 0 \right) \\
+        & = 1 - \lim_{m \to \infty} \PP(T_j > md+r \,\vert\, X_0 = i) \\
+        & = 1 - (1 - \rho_{ij}) \\
+        & = 1,
+    \end{align*}
+    pues $\bm X$ es irreducible y recurrente positiva. Además $\abs{\xi_m} \leq 1$ para toda $m \in \NN$. Así pues, por el teorema \ref{teo:convaco}, 
+    \[
+        \lim_{m \to \infty} P_{ij}^{md+r} = \lim_{m \to \infty} \EE[\xi_m] = d\pi(j),    
+    \]
+    finalizando la demostración del teorema.
+\end{proof}
+
+Una versión aún más general del teorema \ref{teo:convergencia distribucion estacionaria} es el teorema 1.8.5 de \cite{Norris97}, pues se relajan los supuestos de aperiodicidad y recurrencia positiva. Para los propósitos de estas notas, tanta generalidad no es necesaria. Concluimos las notas con ejemplos en los que se aplica el teorema anterior.
+
+\begin{example}
+    Consideremos la cadena de rachas con $p \in (0,1)$. Hemos visto que esta cadena es recurrente positiva y aperiódica, con distribución estacionaria $\pi$ dada por $\pi(i) = p^i (1-p)$ para toda $i \in \NN$. Por el teorema \ref{teo:convergencia distribucion estacionaria}, 
+    \[
+        \lim_{n \to \infty} P_{ij}^n = p^j (1-p).
+    \]
+\end{example}
+
+\begin{example}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Ehrenfest con espacio de estados $\Ee = \{0,1, 2, 3\}$. La matriz de transición es 
+    \[
+        P = \begin{pmatrix}
+            0 & 1 & 0 & 0 \\
+            1/3 & 0 & 2/3 & 0 \\
+            0 & 1/3 & 0 & 2/3 & 0 \\
+            0 & 0 & 1 & 0
+        \end{pmatrix},
+    \] por lo que tiene período 2 y distribución estacionaria $\pi = (1/8, 3/8, 3/8, 1/8)$. Por lo tanto,
+    \[
+        \lim_{n \to \infty} P^{2n} = \begin{pmatrix}
+            1/4 & 0 & 3/4 & 0 \\
+            0 & 3/4 & 0 & 1/4 \\
+            1/4 & 0 & 3/4 & 0 \\
+            0 & 3/4 & 0 & 1/4
+        \end{pmatrix} \quad \text{ y } \quad \lim_{n \to \infty} P^{2n+1}= \begin{pmatrix}
+            0 & 3/4 & 0 & 1/4 \\
+            1/4 & 0 & 3/4 & 0 \\
+            0 & 3/4 & 0 & 1/4 \\
+            1/4 & 0 & 3/4 & 0 
+        \end{pmatrix}.
+    \]
+\end{example}
+
+\begin{example}
+    Un dado justo se lanza repetidamente, los lanzamientos siendo independientes entre sí. Sea $X_n$ la suma de los primeros $n$ lanzamientos. Calcularemos 
+    \[
+        \lim_{n \to \infty} \PP(X_n \text{ es un múltiplo de } 13).
+    \]
+    Denotemos por $R_n$ el residuo que queda al dividir $X_n$ entre 13. Entonces $\bm R = \{R_n\}_{n \in \NN}$ es una cadena de Markov con espacio de estados $\Ee = \{0, 1, \ldots, 12\}$ y probabilidades de transición 
+    \[
+        P_{ij} = \begin{cases}
+            \frac 1 6 & \text{ si } 1 \leq j - i \leq 6 \text{ o } i-j \geq 7, \\
+            0 & \text{ en otro caso}.
+        \end{cases}    
+    \] Como $P_{i,i+1} > 0$ para $0 \leq i \leq 11$ y $P_{12,0} > 0$ se sigue que la cadena es irreducible. De las probabilidades de transición tenemos que 
+    \[
+        \sum_{i = 0}^{12} P_{ij} = 1
+    \] para toda $j \in \Ee$, por lo que $\bm R$ es doblemente estocástica y, por lo tanto, tiene una única distribución estacionaria $\pi$ con $\pi(i) = 1/13$ para toda $i \in \Ee$. Por otra parte, $P_{00}^3 \geq P_{06}P_{6,12}P_{12,0} > 0$ y $P_{00}^4 \geq P_{06}P_{67}P_{7,12}P_{12,1}$, y así vemos que $\bm X$ es aperiódica. Finalmente notemos que $X_n$ es múltiplo de 13 si y sólo si $R_n = 0$, por lo que 
+    \[
+        \lim_{n\to \infty}  \PP(X_n \text{ es un múltiplo de } 13) = \lim_{n \to \infty} \PP(R_n = 0) = \frac{1}{13}.
+    \]
+\end{example}
+
+\begin{example}
+    Consiremos dos vectores $r^0 = (r_0^0, r_1^0, \ldots, r_K^0)$ y $p = (p_0, p_1, \ldots, p_k)$, con $K \geq 1$, con entradas no negativas tales que $\sum_{i = 0}^K r_i^0 = \sum_{i = 0}^K p_i = 1$ y $p_0, p_1 > 0$. Para $i, j \in \{0, 1, \ldots, K\}$, denotemos por $\kappa^i(j)$ como el único entero en $\{0, 1, \ldots, K\}$ tal que $i + \kappa^i(j) - j$ es divisible entre $K+1$. Definamos para cada $n \geq 1$ e $i \in \{0, 1, \ldots, K\}$, 
+    \[
+        r_i^n = \sum_{j = 0}^K r_{j}^{n-1} p_{\kappa^i(j)}.
+    \]
+    Probaremos que $r_i^n \to 1/(K+1)$ cuando $n \to \infty$ para cualquier $i \in \{0, 1, \ldots, K\}$.
+
+    Para esto consideremos una cadena de Markov $\bm X = \{X_n\}_{n \in \NN}$ con espacio de estados $\Ee = \{0, 1, \ldots, K\}$, con probabilidades de transición dadas por $P_{ij} = p_{\kappa^i(j)}$, lo que da la siguiente matriz de transición:
+    \[
+        P = \begin{pmatrix}
+            p_0 & p_1 & p_2 & \cdots & p_{K-1} & p_K \\
+            p_K & p_0 & p_1 & \cdots & p_{K-2} & p_{K-1} \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+            p_2 & p_3 & p_4 & \cdots & p_0 & p_1 \\
+            p_1 & p_2 & p_3 & \cdots & p_K & p_0
+        \end{pmatrix}.
+    \]
+    Es claro que $\bm X$ es doblemente estocástica, mientras que las condiciones $p_0 > 0$ y $p_1 > 0$ son suficientes para que la cadena sea irreducible y aperiódica. Como $\Ee$ es finito, $\bm X$ es recurrente positiva. Por ejemplos anteriores, sabemos que la única distribución estacionaria está dada por $\pi$, con $\pi(i) = 1/(K+1)$ para cada $i \in \Ee$. Por el teorema \ref{teo:convergencia distribucion estacionaria}, 
+    \[
+        \lim_{n \to \infty} \PP(X_n = i) = \frac{1}{K+1}
+    \]
+    para cualquier distribución inicial $\pi_0$. En particular, si consideramos $\pi_0 = r^0$ tendremos que $\pi_n = (r_0^n, r_1^n, \ldots, r_K^n)$ para cada $n \in \NN$. Por lo tanto podemos concluir que para cualquier $i \in \{0, 1, \ldots, K\}$ se satisfará
+    \[
+        \lim_{n \to \infty} r_i^n = \frac{1}{K+1}.
+    \]
+\end{example}

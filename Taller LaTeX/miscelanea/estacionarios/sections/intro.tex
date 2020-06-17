@@ -1,0 +1,37 @@
+\chapter{Distribuciones estacionarias}
+
+\noindent En estas notas se pretenden dar algunos de los resultados principales de las distribuciones \emph{estacionarias}, \emph{invariantes} o \emph{de equilibrios}. Estas distribuciones nos permitirán estudiar comportamientos asintóticos de las cadenas de Markov,\footnote{Recordemos que todas las cadenas con las que se trabajan en este curso son a tiempo discreto y homogéneas.} en particular si la cadena tiende a equilibrarse estocásticamente en una distribución dada, aunque también sabremos cosas de la cadena si esto último no sucede. Las notas están basadas esencialmente en \cite{Hoel72} y \cite{Norris97}.
+
+Para motivar un poco el estudio de las distribuciones estacionarias, pensemos en la cadena de Markov $\bm X = \{X_n\}_{n \in \NN}$ más simple, aquella con espacio de estados $\Ee = \{0,1\}$ y matriz de probabilidades de transición 
+\[
+    P = \begin{pmatrix}
+       1-p & p \\
+       q & 1-q 
+    \end{pmatrix}.
+\]
+Supongamos que $\pi_0 := (\PP(X_0 = 0), \PP(X_0 = 1)) = (r, 1-r)$. En  este caso podemos calcular $\pi_n := (\PP(X_n = 0), \PP(X_n = 1))$ para toda $n \in \NN$ de forma recursiva, pues por probabilidad total tendremos que
+\begin{align*}
+    \pi_{n+1}(0) & = \PP(X_{n+1} = 0 \,\vert\, X_n = 0) \pi_n(0) + \PP(X_{n+1} = 0 \,\vert\, X_n = 1) \pi_n(1) \\
+    & = (1-p) \pi_n(0) + q \pi_n(1) \\
+    & = q + (1 - p - q) \pi_n(0).
+\end{align*}
+Así las cosas, $\pi_1(0) = q + (1-p-q)r$, $\pi_2(0) = (1-p-q)^2 r + q  (1 + (1-p-q))$ y en general 
+\begin{equation}
+    \pi_n(0) = (1-p-q)^n r + q \sum_{k = 0}^{n-1} (1 - p - q)^k. \label{eq:2estados}
+\end{equation}
+Notemos que si $p + q = 0$ entonces es claro que $\pi_n = \pi_0$ para toda $n \in \NN$, pues la suma que aparece en (\ref{eq:2estados}) será cero y entonces $\pi_n(0) = r$. Por otra parte, si  $0 < p + q < 2$,
+\[
+    \begin{split}
+        \pi_n(0) & = (1 - p - q)^n r + q \frac{1 -  (1 - p - q)^n}{p+q} \\
+        & = \frac{q}{p+q} + (1-p-q)^n \left(r - \frac{q}{q+p}\right) \stackrel{n \to \infty}{\longrightarrow} \frac{q}{p + q}.
+    \end{split}
+\] 
+Además, observando que $ 1 - r - p /  (p + q) = q/(p+q) - r$, 
+\[
+    \pi_n(1) = 1 - \pi_n(0) = \frac{p}{p+q} + (1-p-q)^n \left(1 - r - \frac{p}{p + q} \right) \stackrel{n \to \infty}{\longrightarrow} \frac{p}{p + q}. 
+\]
+En este caso, $0 < p+q < 2$,vemos que si $n$ es suficientemente grande entonces $X_n$ tendrá un distribución que será aproximadamente $\ber\big(p/(p+q)\big)$, de forma sorprendente, sin importar el valor de $r$, lo que particularmente implica que 
+\[
+    \lim_{n \to \infty} \PP(X_n = 0 \,\vert\, X_0 = 0) = \lim_{n \to \infty} P_{00}^n = \frac{q}{q+n},
+\]
+de donde la influencia de $X_0$ se va desvaneciendo mientras más pasos se den. El caso $p+q = 1$ será estudiado posteriormente, cuando las herramientas pertinentes se hayan desarrollado. 

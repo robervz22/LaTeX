@@ -1,0 +1,111 @@
+\section{Propiedades básicas de distribuciones estacionarias}
+
+\noindent Habiendo visto un pequeño ejemplo en el que parece que una cadena de Markov se estabiliza o equilibra asintóticamente, procedemos a dar algunas propiedades de las distribuciones estacionarias, pero para poder hacerlo debemos saber qué es una distribución estacionaria.
+
+\begin{definition} \label{def:vinvariante}
+    Sea $\{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de probabilidades de transición $P$. Diremos que $\pi : \Ee \to \RR$ es una \emph{medida invariante} si satisface las siguientes condiciones:
+    \begin{enumerate}
+        \item $\pi(i) \geq 0$ para toda $i \in \Ee$.
+        \item Para toda $i \in \Ee$, $\pi(i) = \sum_{j \in \Ee} \pi(j) P_{ji}$.
+    \end{enumerate}
+    Si además $\sum_{i \in \Ee} \pi(i) = 1$, diremos que $\pi$ es una \emph{distribución estacionaria} o \emph{distribución invariante}.
+\end{definition}
+
+Si se representa a $\pi$ mediante un vector renglón entonces la condición 2 de la definición \ref{def:vinvariante} es equivalente a pedir a $\pi = \pi P$.
+
+\begin{example}
+    Consideremos la cadena de Markov $\bm X = \{X_n\}_{n \in \NN}$ con espacio de estados $\Ee = \{1, 2, 3\}$ y matriz de probabilidades de transición
+    \[
+        P = \begin{pmatrix}
+            0 & 1 & 0 \\
+            0 & 1/2 & 1/2 \\
+            1/2 & 0 & 1/2
+        \end{pmatrix}.
+    \] Si queremos encontrar una distribución estacionaria para esta cadena, debemos encontrar un vector $\pi$ con entradas no negativas, tal que satisfaga 
+    $\sum_{i \in \Ee} \pi(i) = 1$ y $\pi = \pi P$, lo que nos da el siguiente sistema de ecuaciones:
+    \begin{align*}
+        \pi(1) & = \frac 1 2 \pi(3), \\
+        \pi(2) & = \pi(1) + \frac 1 2 \pi(2), \\
+        \pi(3) & = \frac 1 2 \pi(2) + \frac 1 2 \pi(3), \\
+         1 & = \pi(1) + \pi(2) + \pi(3).
+    \end{align*}
+    Resolviendo el sistema de ecuaciones planteado se obtiene que $\pi = (1/5, 2/5, 2/5)$ es una distribución estacionaria.
+\end{example}
+
+Ahora veremos un resultado que explica el término \emph{distribución estacionaria}.
+
+\begin{proposition} \label{prop:estacionario}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ y matriz de probabilidades de transición $P$. Si la distribución $\pi$ de $X_0$ es invariante entonces para toda $n \in \NN$ la distribución de $X_n$ es $\pi$.
+\end{proposition}
+
+\begin{proof}
+    Denotemos por $\pi_n$ la distribución de $X_n$. Por ser $\pi_0 = \pi$ una distribución estacionaria, 
+    \[
+        \pi_1 = \pi_0 P = \pi P = \pi = \pi_0.
+    \] El resultado se sigue de forma inductiva, usando que $\pi_{n+1} = \pi_n P$ para toda $n \in \NN$.
+\end{proof}
+
+Los siguientes resultados ayudan a explicar, parcialmente, el concepto de distribución de \emph{equilibrio}.
+
+\begin{proposition} \label{prop:convergencia finita}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$ finito y matriz de probabilidades de transición $P$. Si existe $i \in \Ee$ tal que 
+    \begin{equation}
+        \lim_{n \to \infty} P_{ij}^n = \pi(j)  \label{eq:limprobastrans}
+    \end{equation}
+    para toda $j \in \Ee$, entonces $\pi = \{\pi(j) : j \in \Ee\}$ es una distribución estacionaria. 
+\end{proposition}
+
+\begin{proof}
+    Observemos que $\pi(j) \geq 0$ para toda $j \in \Ee$ por ser límite de números no negativos. Por ser $\Ee$ finito y de (\ref{eq:limprobastrans}) tendremos
+    \[
+        \sum_{j \in \Ee} \pi(j)  = \sum_{j \in \Ee} \lim_{n \to \infty} P_{ij}^n = \lim_{n \to \infty} \sum_{j \in \Ee} P_{ij}^n = 1.
+    \]
+    Por Chapman--Kolmogorov, (\ref{eq:limprobastrans}) y la finitud de $\Ee$,
+    \[
+        \pi(j) = \lim_{n \to \infty} P_{ij}^{n+1} = \lim_{n \to \infty} \sum_{k \in \Ee} P_{ik}^n P_{kj} = \sum_{k \in \Ee} \lim_{n \to \infty} P_{ik}^n P_{kj} = \sum_{n \in \Ee} \pi(k) P_{kj}.
+    \]
+    Por lo tanto, $\pi$ resulta ser una distribución invariante.
+\end{proof}
+
+Notemos que en la demostración anterior la condición de que $\Ee$ es finito se requiere para cambiar la suma y el límite, además de la condición (\ref{eq:limprobastrans}) es para una $i \in \Ee$ fija y no para toda $i \in \Ee$. Un ejemplo en el que se puede observar que el límite $\pi$ que se obtiene en la proposición \ref{prop:convergencia finita} depende de $i \in \Ee$ es el siguiente.
+
+\begin{example} \label{ej:vaquero 2 estados}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ la cadena de Markov con espacio de estados $\Ee = \{0,1\}$ y probabilidades de transición $P_{00} = P_{11} = 1$. Entonces $P_{00}^n = P_{11}^n = 1$ para toda $n \in \NN$ y por la proposición \ref{prop:convergencia finita}, tanto $\pi^0 = (1,0)$ como $\pi^1 = (0,1)$ resultan ser distribuciones estacionarias.
+\end{example}
+
+Para obtener un resultado asintótico sobre la distribución de $X_n$ en el que no influya la distribución inicial, supondremos que el límite en (\ref{eq:limprobastrans}) es uniforme en $i \in \Ee$, por lo que podremos relajar la condición de que $\Ee$ sea finito. Empero, a diferencia de la proposición \ref{prop:convergencia finita}, no podremos deducir que $\pi$ es una distribución estacionaria, sino que tendrá que ser parte de los supuestos.
+
+\begin{proposition} \label{prop:convergencia distribucion}
+    Sea $\bm X = \{X_n\}_{n \in \NN}$ una cadena de Markov con espacio de estados $\Ee$, matriz de probabilidades de transición $P$. Sea $\pi$ es una distribución estacionaria. Si para cualesquiera $i, j \in \Ee$ se cumple
+    \begin{equation}
+        \lim_{n \to \infty} P_{ij}^n = \pi(j)  \label{eq:limprobastrans2}
+    \end{equation}
+    entonces 
+    \[
+    \lim_{n \to \infty} \PP(X_n = j) = \pi(j)    
+    \]
+    se satisfará para toda $j \in \Ee$.
+\end{proposition}
+
+\begin{proof}
+    Supongamos que $\pi$ es una distribución estacionaria para $\bm X$, mientras que $\pi_0$ es la distribución inicial para la cadena, y que se satisface (\ref{eq:limprobastrans2}). Fijando $j \in \Ee$, tendremos
+    \[
+        \PP(X_n = j) = \sum_{i \in \Ee} \pi_0(i) P_{ij}^n = \EE[Y_n^j],
+    \]
+    donde $Y_n^j$ es una variable aleatoria que toma el valor $P_{ij}^n$ con probabilidad $\pi_0(i)$. Por (\ref{eq:limprobastrans2}), $Y_n^j \to \pi(j)$ cuando $n \to \infty$ y además $\abs{Y_n^j} \leq 1$ para toda $n \in \NN$, entonces por el teorema \ref{teo:convaco},
+    \[
+        \lim_{n \to \infty} \PP(X_n = j) = \lim_{n \to \infty} \EE[Y_n^j] = \EE[\pi(j)] = \pi(j). \qedhere
+    \]
+\end{proof}
+
+Un resultado que se obtiene directamente de la proposición anterior es el siguiente.
+
+\begin{corollary}
+    Considerando las mismas hipótesis que en la proposición \ref{prop:convergencia distribucion} la distribución estacionaria de $\bm X$ es única.
+\end{corollary}
+
+\begin{proof}
+    Sea $\pi$ la distribución estacionaria del enunciado. Supongamos que la distribución inicial de $\bm X$, $\tilde\pi$, es estacionaria. Entonces $\PP(X_n = j) = \PP(X_0 = j) = \tilde\pi(j)$ para toda $n \in \NN$ y para toda $j \in \Ee$, por lo que $\lim_{n \to \infty} \PP(X_n = j) = \tilde\pi(j)$ para toda $j \in \Ee$. Luego, por la proposición \ref{prop:convergencia distribucion} concluimos que $\tilde\pi(j) = \pi(j)$ para toda $j \in \Ee$.
+\end{proof}
+
+Los resultados que aparecen en esta sección, si bien nos dan relaciones entre las probabilidades de transición a $n$ pasos y las distribuciones estacionarias, no son útiles en el sentido de que no dan información de qué cadenas tienen distribuciones estacionarias y cuándo se cumplen (\ref{eq:limprobastrans}) y (\ref{eq:limprobastrans2}). Estas preguntas se responderán en secciones posteriores.
