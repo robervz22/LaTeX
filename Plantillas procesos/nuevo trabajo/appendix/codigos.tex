@@ -1,0 +1,33 @@
+\chapter{Códigos}
+
+\noindent En esta parte van todos los códigos. Un ejemplo del paquete \texttt{listings}:
+
+\begin{lstlisting}[language=R]
+  poisson_tiempo <- function(Tiempo, intensidad){
+      # Numero de saltos
+      N_aux <- rpois(n = 1, lambda = intensidad * Tiempo)
+      # Donde ocurrieron los saltos
+      # Agregamos el cero y el tiempo final
+      tiempos <- c(0, sort(runif(n = N_aux, max = Tiempo)), Tiempo)
+      # Regresamos data frame con los tiempos y 
+      # los valores para graficar
+      return(
+          data.frame(
+              t = tiempos,
+              n = c(0:N_aux, N_aux)
+          )
+      )
+  }
+\end{lstlisting}
+
+Si lo prefieren, pueden escribir pseudoalgoritmos con el paquete \texttt{algorithm2e}. Un ejemplo:
+
+\begin{algorithm}[H]
+  \Begin{
+    Simular $X \sim h$ y $U \sim \mathrm{U}(0,1)$ \;
+    \lIf{$\frac{M h(X) U}{g(X)} \leq 1$}{se acepta $X$}
+    \lElse{se regresa a 2}
+  }
+  \KwResult{Una simulación $X \sim g$.}
+  \caption{Método de aceptación y rechazo.}
+\end{algorithm}

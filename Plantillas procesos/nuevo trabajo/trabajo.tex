@@ -1,0 +1,132 @@
+\documentclass[12pt,a4paper,openany]{memoir}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{macros}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage[spanish,onelanguage,ruled,linesnumbered]{algorithm2e}
+%\usepackage{showframe}
+
+\usepackage{lipsum}
+
+\hypersetup{
+pdfborder={0 0 0},      % Sin bordes alrededor de los enlaces
+pdfauthor={inm} % autor
+}
+
+\setlist[enumerate]{}
+\setlist[enumerate,1]{label = \arabic*), ref   = \arabic*}
+\setlist[enumerate,2]{label = \emph{\alph*}),ref   = \theenumi.\emph{\alph*}}
+\setlist[enumerate,3]{label = \roman*),ref   = \theenumii.\roman*}
+
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout 
+
+%{\color{Black} 0.2078795763507619386418944456157081968275756532852224611987259842623}
+
+%\makeevenfoot{headings}{}{\color{Black} 0.207879576350761938641894445615708196827575653285222461198725984262\ldots}{}
+%\makeoddfoot{headings}{}{\color{Black} 0.207879576350761938641894445615708196827575653285222461198725984262\ldots}{}
+%\makeoddfoot{empty}{}{\color{Black} 0.207879576350761938641894445615708196827575653285222461198725984262\ldots}{}
+
+\nouppercaseheads
+\pagestyle{headings}
+%\chapterstyle{demo3}
+\makechapterstyle{AlexanderGrebenkov}{%
+    \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}\hrule\medskip}
+    \renewcommand{\chapnamefont}{\normalfont\large\scshape}
+    \renewcommand{\chapnumfont}{\normalfont\large\scshape}
+    \renewcommand{\chaptitlefont}{\normalfont\large\scshape}
+    \renewcommand{\printchaptername}{{\S}}
+    \renewcommand{\chapternamenum}{ }
+    \renewcommand{\printchapternum}{\chapnumfont \thechapter}
+    \renewcommand{\afterchapternum}{. }
+    \renewcommand{\afterchaptertitle}{\par\nobreak\medskip\hrule\vskip\afterchapskip}
+}
+\chapterstyle{AlexanderGrebenkov}
+
+\setbeforesecskip{3.5ex plus 1ex minus .2ex}
+\setsecheadstyle{\normalfont\normalsize\scshape\noindent{\S}}
+\setaftersecskip{2.3ex plus .2ex}
+\setsubsecheadstyle{\normalfont\normalsize\scshape}
+\setparaheadstyle{\normalfont\normalsize\scshape}
+%\setparaindent{0pt}\setafterparaskip{0pt}
+
+\usepackage[
+backend=biber,
+style=apa,
+sorting=nty
+]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{res.bib}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aquí va la portada
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlingpage} % Portada
+
+    \raggedleft % Alineada a la derecha
+    %\raggedright % Alineada a la izquierda
+	
+	\vspace*{\baselineskip} % Whitespace at the top of the page
+	
+	\vspace*{0.25\textheight} % Whitespace before the title
+	
+	%------------------------------------------------
+	%	Cosas del título
+	%------------------------------------------------
+	
+    \textbf{\huge Procesos Estocásticos I}\\[\baselineskip] % Nombre de la materia
+    
+    \vspace*{0.1\textheight}
+
+    {\Huge{\textbf{Ponerle título}}}\\[\baselineskip] % Aquí va el título
+    \vspace*{0.1\textheight}
+
+    %------------------------------------------------
+	%	Aquí van los nombres
+	%------------------------------------------------
+    
+    {\Large Alumno 1}\\[\baselineskip]
+    {\Large Alumno 2}\\[\baselineskip]
+    {\Large Alumno 3}\\[\baselineskip]
+    {\Large Alumno 4}\\[\baselineskip]
+    {\Large Alumno 5}\\[\baselineskip]
+	
+	\vfill
+
+\end{titlingpage}
+
+% Comentar lo que no se quiera o no se use
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+\thispagestyle{empty}
+\input{sections/markov}
+\input{sections/poisson}
+\input{sections/martingalas}
+\input{sections/movimiento-brown}
+
+\newpage
+\appendix
+\input{appendix/codigos}
+\input{appendix/figuras}
+
+\newpage
+\backmatter
+\printbibliography[title={Referencias}]
+
+\end{document}

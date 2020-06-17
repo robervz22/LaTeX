@@ -1,0 +1,81 @@
+% En este archivo, podemos definir nuestros propios comandos
+%
+\ProvidesPackage{macros}[Mis macros]
+
+
+%%%%%%%%%%%%%%%%%% Agregamos el directorio de figuras al PATH %%%%%%%%%%%%%%%%%%
+\graphicspath{ {./Images/} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Definiciones adicionales %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{amscd}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{latexsym}
+\RequirePackage{mathrsfs}
+\RequirePackage{bm}
+\RequirePackage{bbm}
+\RequirePackage{mathtools}
+\RequirePackage{xifthen}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposici\'on}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definici\'on}
+\newtheorem{example}{Ejemplo}[chapter]
+\newtheorem*{notation}{Notaci\'on}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observaci\'on}
+\renewcommand{\qedsymbol}{$\divideontimes$}
+
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Aa}{\mathcal{A}}
+\newcommand{\Bb}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\Ee}{\mathcal{E}}
+\newcommand{\Ff}{\mathcal{F}}
+\newcommand{\Gg}{\mathcal{G}}
+\newcommand{\Hh}{\mathcal{H}}
+\newcommand{\Ii}{\mathcal{I}}
+\newcommand{\Ll}{\mathcal{L}}
+\newcommand{\Mm}{\mathcal{M}}
+\newcommand{\Nn}{\mathcal{N}}
+\newcommand{\Oo}{\mathcal{O}}
+\newcommand{\Pp}{\mathcal{P}}
+\newcommand{\Qq}{\mathcal{Q}}
+\newcommand{\Uu}{\mathcal{U}}
+\newcommand{\Kk}{\mathcal{K}}
+\newcommand{\Xx}{\mathcal{X}}
+\newcommand{\Yy}{\mathcal{Y}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\sa}{\mathbbm{\sigma \text{-álgebra}}}
+\newcommand{\indep}{\raisebox{0.05em}{\rotatebox[origin=c]{90}{$\models$}}}
+
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\vs}{\vspace{.2cm}}
+
+\DeclareMathOperator{\sign}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\ber}{Bernoulli}
+\DeclareMathOperator{\mcd}{mcd}
+
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\newcommand{\norm}[1]{\ensuremath{\left\lVert #1 \right\rVert}}
+\newcommand{\converge}[1]{\ensuremath{\stackrel{#1}{\longrightarrow}}}
+\newcommand{\noconverge}[1]{\ensuremath{\stackrel{#1}{\;\not\!\!\longrightarrow}}}
