@@ -4,4 +4,12 @@
 *.log
 *.out
 *.gz
+*.bcf
+*.fdb_latexmk
+*.fls
+*.loa
+*.lof
+*.lot
+*.xml
+*.toc
 .DS_Store

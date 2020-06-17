@@ -1,7 +1,9 @@
-\documentclass[12pt,a4paper,openany]{memoir}
+\documentclass[12pt,a4paper,openany,oneside]{memoir}
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{libertine}
+\usepackage{libertinust1math}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{microtype}
@@ -108,10 +110,12 @@ sorting=nty
 
 \end{titlingpage}
 
+\frontmatter
 % Comentar lo que no se quiera o no se use
 \tableofcontents
 \listoffigures
 \listoftables
+\listofalgorithms
 
 \mainmatter
 \thispagestyle{empty}
