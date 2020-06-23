@@ -2,6 +2,7 @@
 
 \noindent En esta parte van todos los códigos. Un ejemplo del paquete \texttt{listings}:
 
+{\small
 \begin{lstlisting}[language=R]
   poisson_tiempo <- function(Tiempo, intensidad){
       # Numero de saltos
@@ -19,10 +20,11 @@
       )
   }
 \end{lstlisting}
+}
 
 Si lo prefieren, pueden escribir pseudoalgoritmos con el paquete \texttt{algorithm2e}. Un ejemplo:
 
-\begin{algorithm}[H]
+\begin{algorithm}[htp]
   \Begin{
     Simular $X \sim h$ y $U \sim \mathrm{U}(0,1)$ \;
     \lIf{$\frac{M h(X) U}{g(X)} \leq 1$}{se acepta $X$}
