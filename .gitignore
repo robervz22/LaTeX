@@ -12,4 +12,6 @@
 *.lot
 *.xml
 *.toc
+*.nav
+*.smn
 .DS_Store
