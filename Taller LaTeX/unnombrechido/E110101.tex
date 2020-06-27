@@ -1,0 +1,178 @@
+\documentclass[12pt,a4paper,openany]{memoir}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+%\usepackage{showframe}
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage{kantlipsum}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% La portada (?)
+% La fuente
+\usepackage[adobe-utopia]{mathdesign}
+\usepackage[T1]{fontenc}
+
+% Márgenes y dónde va el bloque de texto
+% \medievalpage
+% \isopage
+% \semiisopage
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{2in}{2.5in}{*}
+\checkandfixthelayout
+
+% Encabezado y pie de página
+%\pagestyle{headings}
+\nouppercaseheads
+\makepagestyle{nuestro}
+\makeevenfoot{nuestro}{\thepage}{}{}
+\makeoddfoot{nuestro}{}{}{\thepage}
+\makeevenhead{nuestro}{\theauthor}{}{\leftmark}
+\makeoddhead{nuestro}{\rightmark}{}{\today}
+\makeheadrule{nuestro}{\textwidth}{1pt}
+%\makefootrule{nuestro}{0.5\textwidth}{1pt}{10pt}
+\pagestyle{nuestro}
+
+% El estilo del encabezado de un capítulo
+%\chapterstyle{wilsondob}
+% section
+% hangnum
+% companion
+% article
+% reparticle
+% demo
+% bianchi
+% bringhurst
+% brotherton
+% chappell
+% culver
+% dash
+% ell
+% lyhne
+% veelo
+% verville
+% crosshead
+% komalike
+%\chapterstyle{culver}
+\makechapterstyle{AlexanderGrebenkov}{%
+    \renewcommand\chapterheadstart{\vspace*{\beforechapskip}\hrule\medskip}\renewcommand\chapnamefont{\normalfont\large\scshape}
+    \renewcommand\chapnumfont{\normalfont\large\scshape}
+    \renewcommand\chaptitlefont{\normalfont\large\scshape}
+    \renewcommand\printchaptername{\hfill\S}
+    \renewcommand\chapternamenum{ }
+    \renewcommand\printchapternum{\chapnumfont \thechapter}
+    \renewcommand\afterchapternum{. }
+    \renewcommand\printchapternonum{\hfill}
+    \renewcommand\afterchaptertitle{
+        \par\nobreak\medskip\hrule\vskip\afterchapskip
+    }
+}
+\chapterstyle{AlexanderGrebenkov}
+
+\makeatletter
+\newcommand\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+\setlength\midchapskip{10pt}
+\makechapterstyle{VZ14}{
+    \setlength{\beforechapskip}{2\baselineskip}
+    \renewcommand\chapterheadstart{\vspace*{\beforechapskip}}
+    \renewcommand\chapternamenum{\space}
+    \renewcommand\printchaptername{\space}
+    \renewcommand\chapnamefont{\Large\scshape}
+    \renewcommand\printchapternum{%
+        \chapnamefont\null\thickhrulefill\quad
+        \@chapapp\space\thechapter\quad\thickhrulefill
+    }
+    \renewcommand\printchapternonum{%
+        \par\thickhrulefill\par\vskip\midchapskip
+        \hrule\vskip\midchapskip
+    }
+    \renewcommand\chaptitlefont{\Huge\scshape\centering}\renewcommand\afterchapternum{%
+        \par\nobreak\vskip\midchapskip
+        \hrule\vskip\midchapskip
+    }
+    \renewcommand\afterchaptertitle{%
+        \par\vskip\midchapskip
+        \hrule\nobreak\vskip\afterchapskip
+    }
+}
+\makeatother
+%\chapterstyle{VZ14}
+%\renewcommand{\clearforchapter}{}
+\setbeforesecskip{3.5ex plus 1ex minus .2ex}
+\setsecheadstyle{\normalfont\normalsize\scshape}
+\setaftersecskip{2.3ex plus .2ex}
+\setsubsecheadstyle{\normalfont\normalsize\scshape}
+
+\author{inm}
+\title{El título del trabajo}
+\date{\today}
+
+\begin{document}
+
+% Una opción para hacer una portada es usar titlingpage
+%\begin{titlingpage}
+%    \maketitle
+%\end{titlingpage}
+
+\thispagestyle{empty}
+
+\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+    \put(0,0) {\includegraphics[width=1in]{figs/ciencias.png}}
+\end{picture}
+\setlength{\unitlength}{1pt}
+
+\begin{minipage}[c][0.8\textheight][c]{1in}
+    \hspace{0.45in}
+    \rule{1pt}{0.8\textheight}
+\end{minipage}
+\hspace{0.1\textwidth}
+\begin{minipage}[c][0.8\textheight][c]{0.5\textwidth}
+    \centering
+    {\HUGE\bfseries \thetitle}\\[3\baselineskip]
+    {\Large\itshape Un bello subtítulo}\\[2\baselineskip]
+    {\large inm \\[\baselineskip] anónimo \\[\baselineskip] sujeto 1 \\[\baselineskip] holi }
+    \vfill
+\end{minipage}
+
+\vfill
+
+\setlength{\unitlength}{1in}
+\begin{picture}(0,0)
+    \put(0,0) {\includegraphics[width=1in]{figs/unam.png}}
+\end{picture}
+\setlength{\unitlength}{1pt}
+
+
+\clearpage
+
+{
+    \renewcommand\cleardoublepage\newpage
+    \frontmatter
+}
+
+\tableofcontents*
+
+{
+    \renewcommand\cleardoublepage\newpage
+    \mainmatter
+}
+
+\chapter{Hola}
+
+\noindent \lipsum[1-6]
+
+\section{Ja, ja}
+
+\noindent Chuchu\footnote{Soy un pie de página}\footnote{A ver} \lipsum[7-12]
+
+\chapter{Mundo}
+
+\noindent \kant[1-4]
+
+\section{Lo que sea}
+
+\noindent \kant[5-7]
+
+\end{document}
