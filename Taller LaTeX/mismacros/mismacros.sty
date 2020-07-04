@@ -1,0 +1,32 @@
+\ProvidesPackage{mismacros}[Mis primeras macros]
+
+% Para poder definir comandos dentro de un sty, debemos cargar algunas paqueterías.
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
+\RequirePackage{bbm}
+
+% Aquí se definen los ambientes de teorema, corolario, etcétera
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposici\'on}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definici\'on}
+\newtheorem{example}{Ejemplo}[chapter]
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observaci\'on}
+
+% Definición de comandos para flojos
+\newcommand\PP{\mathbb P}
+\newcommand\EE{\mathbb E}
+\newcommand\1{\mathbbm 1}
+\newcommand\pleq{\mathbin{\cdot\!\leq\!\cdot}}
+\newcommand\norma[1]{\left\lVert #1 \right\rVert}
+\newcommand\parente[1]{\left( #1 \right)}
+
+% Nuevos operadores matemáticos
+\DeclareMathOperator\var{Var}
