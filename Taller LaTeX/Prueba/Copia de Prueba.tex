@@ -1,0 +1,410 @@
+\documentclass[a4paper,11pt, twocolumn]{article}
+%minimal: Este tipo de documento sólo permite establecer el tamaño de la página y la fuente. Documentos MUY cortos
+%proc: Documentos más cortos
+%article: Documentos cortos
+%report: Documentos medio largos
+%book: Hacer libros(Capítulos, apéndices)
+%memoir: Todo en 1
+%Más fuentes en 
+%https://community.rstudio.com/t/cant-creat-pdf-cant-find-tinytex-or-miktex-files/34960
+%https://tug.org/FontCatalogue/mathfonts.html
+
+%12pt: Tamaño de letra de 12 puntos
+%twocolumns: Doble columna
+\usepackage{ 
+comment,        %Para hacer comentarios largos
+graphicx,       %Para meter figuritas
+enumitem,       %Para hacer listas chidas (Paquete esencial en la vida)
+amsfonts,       %Las letras de pizarra
+amsmath,        %Fracciones, integrales y otras cosas
+amsthm,         %Teoremas
+amssymb,        %Más símbolos
+mathtools,      %MÁS SÍMBOLOS
+mathrsfs,       %Letras cursivas matemáticas
+bm,             %Letras matemáticas negritas
+bbm,            %Esta da la indicadora con \mathbbm 1
+physics,        %Símbolos físicos
+chronology,     %Líneas de tiempo
+tikz,           %Figuras
+pgfplots        %Gráficas
+}
+\usepackage[ruled,vlined,spanish,onelanguage]{algorithm2e} %Algoritmos
+\usepackage[utf8]{inputenc}
+% Para que el documento pueda poner acentos y demás caracteres.
+\title{La tarea que pidió Imanol} %Aquí va el título
+\author{Pues yo, quién más}  %El autor
+\date{Hoy} %La fecha
+
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Aa}{\mathcal{A}}
+\newcommand{\Bb}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\Ee}{\mathcal{E}}
+\newcommand{\Ff}{\mathcal{F}}
+\newcommand{\Gg}{\mathcal{G}}
+\newcommand{\Hh}{\mathcal{H}}
+\newcommand{\Ii}{\mathcal{I}}
+\newcommand{\Jj}{\mathcal{J}}
+\newcommand{\Kk}{\mathcal{K}}
+\newcommand{\Ll}{\mathcal{L}}
+\newcommand{\Mm}{\mathcal{M}}
+\newcommand{\Nn}{\mathcal{N}}
+\newcommand{\Oo}{\mathcal{O}}
+\newcommand{\Pp}{\mathcal{P}}
+\newcommand{\Qq}{\mathcal{Q}}
+\newcommand{\Uu}{\mathcal{U}}
+\newcommand{\Xx}{\mathcal{X}}
+\newcommand{\Yy}{\mathcal{Y}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\dif}{\,\text{d}}
+\newcommand{\p}{\,\cdot\,}
+\newcommand{\sa}{\mathbbm{\sigma \text{-álgebra}}}
+\DeclareMathOperator{\sign}{sgn}
+\newcommand{\indep}{\raisebox{0.05em}{\rotatebox[origin=c]{90}{$\models$}}}
+
+\setlength\parindent{0pt}
+%Quitar sangría
+\begin{document}
+\maketitle %Aquí pedimos que se ponga el título, autor y fecha
+añ 
+
+\begin{abstract}
+	En este documento vamos a aprender a usar \LaTeX (\TeX).
+\end{abstract}
+
+
+A en unicode (U+0041). \textbf{Así ponemos las letras negritas}. \emph{Así las itálicas} o \textit{así}. \underline{Así subrayamos cosas}. \textbf{\underline{llll}}.\\
+\section{Lista del súper}
+\begin{itemize}
+\item[$\square$] Zanahorias, 
+\item[c)] Aguacate,
+\item Manzanas,
+\item Naranjas,
+\item $\frac{1}{2}$kg de fresas, %Así se ponen las fracciones chiquitas dentro del texto
+\item $\dfrac{1}{4}$kg queso parmesano.%Así se ponen las fracciones grandes dentro del texto
+\end{itemize}
+
+\section{Pasos para superar el alcoholismo}
+\begin{enumerate}
+\item Aceptar que tienes un problema.
+\item Ir a tomar café con @ImanolBuscaTag.
+\end{enumerate}
+
+\subsection{Lista del súper}
+\begin{itemize}[label=$\square$]
+\item Zanahorias, 
+\item Aguacate,
+\item Manzanas,
+\item Naranjas,
+\item $\frac{1}{2}$kg de fresas, %Así se ponen las fracciones chiquitas dentro del texto
+\item $\dfrac{1}{4}$kg queso parmesano.%Así se ponen las fracciones grandes dentro del texto
+\end{itemize}
+
+%\part{}  Éste no sirve para archivos tipo article
+%\chapter{} Éste tampoco
+%\section{}
+%\subsection{}
+%\subsubsection{}
+%\paragraph{}    No lo vamos a ocupar
+%\subparagraph{}     Tampoco
+
+
+A + ` = À
+
+?`% Así se pone el caracter ¿
+
+\'a %Poner acento
+\\ %Salto de línea
+Sea $f:[a,b]\to\mathbb R$ una función continua y $F:[a,b]\to\mathbb R$ una función tal que $F'(x)=f(x),$ para toda $x\in [a,b]$, entonces
+\[\dv[n]{f}{x}  \]
+\[3.14^2\pdv[2]{u}{x} =  \pdv[2]{u}{t}\]
+
+
+
+efeaxwqx
+
+\begin{algorithm}[h]
+\KwData{$n$ un número natural.}
+\KwResult{ El \begin{math}n\end{math}-ésimo término de la sucesión de Fibonacci.}
+$aux=n$\,
+\If{aux = 0,1}{
+regresa 1
+}{
+Fibonacci($aux-1$)+Fibonacci($aux-2$)
+}
+\caption{Fibonacci}
+\end{algorithm}
+
+
+\begin{algorithm}
+ \KwData{Una matriz $C$ de costos.}
+ \KwResult{$\overline U$ conjunto inicial de asignaciones,\\ $\varphi$ un inicial vector de asignación de personas,\\ $f$ un vector inicial de asignación de tareas,\\$(u,v)$ una solución dual factible.}
+  \For{$i \in\{1,...,n\}$}{
+   $u_i := \min\{c_{i,j}:j\in\{1,...,n\}\}$\;
+   }
+  \For{$j \in\{1,...,n\}$}{
+   $v_j := \min\{c_{i,j}-u_i : i\in\{1,...,n\}\}$
+   }
+  \For{$i \in\{1,...,n\}$}{
+   \For{$j \in\{1,...,n\}$}{
+    \If{$f(j) = 0$, $c_{i,j}-u_i-v_j=0$ y $i\notin\overline U$ }{
+    $f(j) = i$\;
+    $\varphi(i) = j$\;
+    $\overline U = \overline U \cup \{i\}$
+    }
+   }
+  }
+ \caption{Preprocesamiento}
+\end{algorithm}
+
+
+5tef
+erger
+
+\begin{comment}
+A ver David, aquí debes de poner tu parte de la tarea
+¡¡¡Aquí!!!
+¡¡¡AQUÍ!!!
+\end{comment}
+
+\# \$ \% \^{} \& \_ $\{$ $\}$ \~{} $\backslash$
+
+
+
+\begin{itemize}
+\item 10pt, 11pt, 12pt,... : Cambiar el tamaño de la fuente.
+\item a4paper, letterpaper, legalpaper: Tamaño del papel.
+\item fleqn: Pasar las fórmulas del centro a la izquierda.
+\item leqno: números de izquerda a derecha.
+\item titlepage, notitlepage: para poner o no poner una sola página con título.
+\item twocolumn, onecolumn: para poner el documento con dos columnas o una columna.
+\item twoside, oneside: Documento de dos caras o una cara(article o report).
+\item landscape: Para que el documento esté en forma horizontal.
+\item openright, openany: Para que el nuevo capítulo (de un documento tipo Book) empiece del lado derecho o empiece en cualquier lado.
+\end{itemize}
+
+\[\left| \det \begin{pmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{pmatrix}\right|
+\]
+
+\[\bordermatrix{ & 1 & 2 \cr 
+1 & 1/2 & 1/2 \cr 
+2 & 1/2 & 1/2 \cr }\]
+
+\[\begin{bmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{bmatrix}
+\]
+
+\[\begin{Bmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{Bmatrix}
+\]
+
+\[\begin{vmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{vmatrix}
+\]
+
+\[\Bigg(\begin{matrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{matrix}\Bigg)
+\]
+
+\[\mathbb E \left[Y_{t+1} \Bigg| \sum_{i=1}^{N_t}Y_i\right] \]
+
+\[\int_a^b x dx = \frac{x^2}{2}\bigg|_{x=a}^{x=b}\]
+
+\[f(x) = \begin{cases}
+ \lambda e^{-\lambda x} & \text{si }x>0,\\
+ 0 & \text{e.o.c.}
+ \end{cases}
+\]
+
+\[\text{frfrf }\int_a^b f\]
+
+Quiero meter matrices al texto $\mathcal{E}leospapie$$\begin{pmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+4 & 9 & 10
+\end{pmatrix}$, esto se va a ver feo :'(. $\left(\begin{smallmatrix}
+3 & 2 & 0\\
+4 & 10 & 10\\
+\end{smallmatrix}\right)$\\ 
+
+
+Definimos a la función $f:[0,1]\to \RR$ dada por $f(x) = x^2/(x+5)$. La gráfica de $f$ es la siguiente\\
+
+\textbf{Teorema:} Dado un polinomio $f(x)\in \mathbb{C} [x]$ de grado $n>0$, existen $a,\alpha_1,\dots,\alpha_n\in\mathbb{C}$ (no necesariamente distintos) tales que
+
+\[f(x) = a\prod_{k=1}^n (x-\alpha_k).\]
+
+Eso es, $f(x)$ tiene tantas raíces en $\mathbb{C}$ como su grado.\\
+
+\textbf{Teorema (de Box-Muller):} Sean $X_1,X_2$ v.a.i.i.d.'s Unif$(0,1)$. Entonces las v.a.'s definidas por 
+\begin{align*}
+Y_1 &= \cos(2\pi X_2)\sqrt{-2\ln(X_1)},\\
+Y_2&=\sin(2\pi X_2)\sqrt{-2\ln(X_1)}
+\end{align*}
+
+se distribuyen normal estándar y además son independientes.\\
+
+\textbf{Segundo Teorema Fundamental del Cálculo:} Sea $f:[a,b]\to \mathbb{R}$ una función integrable y $F:[a,b]\to \mathbb{R}$ una función tal que $F'=f$, entonces 
+
+\[\int_a^bf(x)\mathrm{d}x = F(b)-F(a).\] \\\\\\
+
+\textbf{Teorema:} $\vdash \mathcal B\Rightarrow\mathcal B$ para cualquier fórmula bien formada $\mathcal B$.\\\\
+
+\textbf{Teorema:} Sea $(x_n)_{n \in A}$ una sucesión de números reales, es convergente si y sólo si es de Cauchy.\\\\
+ 
+\textbf{Teorema (de Heine-Borel):} Sea $K$ un subconjunto de $\mathbb R^n$. Entonces $K$ es compacto si y sólo si $K$ es cerrado y acotado.\\\\
+
+\textbf{Teorema:} La SDE dada por
+
+\[\mathrm{d}X_t = \theta (\mu-X_t)\mathrm{d}t +\sigma\mathrm{d}B_t,\]
+
+donde $\sigma>0$, $\theta\neq 0$ y $\mu\in\mathbb{R}$, tiene como solución 
+
+\[X_t = e^{-\theta t}X_0 + \left(1-e^{-\theta t}\right)\mu + \sigma e^{-\theta t}\int_0^te^{s\theta}\mathrm{d}B_t.\]\\
+
+\textbf{Teorema:} La ecuación diferencial $M(x,y)dx+N(x,y)dy = 0$ es exacta si y sólo si 
+\[\frac{\partial M(x,y)}{\partial y}=\frac{\partial N(x,y)}{\partial x}.\] 
+
+\textbf{Teorema:} Sean $V,W$ espacios de Banach y $\Omega$ un subconjunto abierto de $V$. Entonces $\varphi : \Omega \to W$ es Fréchet-difereciable en $\Omega$ si y sólo si $\varphi$ es Gâteaux-diferenciable en $\Omega$ y su derivada de Gâteaux $\mathcal{G}\varphi:\Omega\to\mathcal{L}(V,W)$ es continua. En tal caso, $\mathcal{G}\varphi = \varphi'$.\\
+
+\textbf{Teorema:} Sea $f:[a,b]\rightarrow\mathbb{R}$ una función Riemann-integrable en $[a,b]$. Si $\forall \epsilon>0$, $\exists P_\epsilon$ tal que si $P$ es refinamiento de $P_\epsilon$ y $S(f;P)$ una suma de Riemann de la función $f$, entonces
+
+$$\left|S(f;P)-\int_a^b f \right|<\epsilon.$$
+
+Esto significa que
+$$\int_a^b f(x)\mathrm{d}x = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(x_i)\Delta x_i.$$ 
+
+\textbf{Teorema (Fórmula Integral de Cauchy):} Sea $D$ un disco cerrado en $\mathbb C$ y $U$ un subconjunto abierto de $\mathbb C$ tal que $D\subset U$. Sea $f:U\rightarrow \mathbb C$ una función holomorfa y $\gamma:[0,1] \to \mathbb C$ una parametrización definida positiva de $\partial D$. Entonces para toda $a\in \mathrm{int}(D)$, se tiene que
+
+\[f(a) = \dfrac{1}{2\pi i}\oint_\gamma \frac{f(z)}{z-a}\mathrm{d}z.\]\\
+
+\textbf{Teorema:} Sea $F$ una función no decreciente y continua por la derecha. Si $g:[a,b]\to \mathbb{R}$ es una función acotada y cuya integral de Riemann-Stieltjes existe, entonces $g$ es $(\mathcal{M}_F,\mathcal{B}(\mathbb{R}))$-medible y 
+
+\[\int_{(a,b]}g\mathrm d \mu_F = \int_a^b g\mathrm d F.\]\\\\\\\\\\
+
+\textbf{Teorema:} Sea $f:[0,\infty)\to \mathbb{R}$ una función seccionalmente continua en $[0,b]$, para todo $b$ positivo. Si existen constantes $a,K,M>0$ tal que $|f(x)|\leq Ke^{ax}$ para toda $x\geq M$, entonces la transformada de Laplace de $f$, 
+
+\[\mathcal L [f(x)] = \int_0^\infty e^{-sx}f(x)\mathrm dx,\]
+
+existe para toda $s>a.$\\\\
+
+\textbf{Teorema (de Liouville):} Si $f:\mathbb C\to \mathbb C$ es una función entera y acotada, entonces $f$ es una función constante.\\\\
+
+\textbf{Teorema:} $A$ admite una factorización de Cholesky, es decir, $A = LL^t$ donde $L\in M_{n\times n}(\RR)$ es una matriz triangular superior, si y sólo si $A$ es simétrica y definida positiva.\\
+
+\textbf{Teorema (Hahn-Banach):} Sea $V$ un espacio de Banach, $S$ un subespacio vectorial de $V$ y $\mathbb K$ el campo $\mathbb R$ o $\mathbb C$. Si $p:V\to \mathbb K$ es un funcional sublineal y $f:S\to \mathbb K$ un funcional lineal acotado por $p$ en $S$, entonces existe un funcional lineal $\widehat f: V\to \mathbb K$ tal que $\widehat f(x) = f(x)$ para todo $x\in S$ y $|\widehat f(x)|\leq p(x)$ para todo $x\in V$. \\\\
+
+\textbf{Teorema (de existencia y unicidad):} Sea $R\subseteq \RR^2$ dado por \[R=\{(x,y)\in \mathbb R^2: |x-x_0|<a,|y-y_0|<b\}.\] Si $f$ y $\partial_y f$ son funciones continuas sobre $R$, entonces el problema de Cauchy $y'(x)=f(x,y)$, $y(0)=y_0$ tiene una única solución sobre 
+\[R' = \{(x,y)\in \mathbb R^2: |x-x_0|<h,|y-y_0|<b\},\] donde $h=\min\{a,b/M\}$ y $M = \max_{(x,y)\in R}\{|f(x,y)|\}$.\\\\
+
+\textbf{Teorema (Hall):} Sea $G=(U,V; A)$ una gráfica bipartita tal que $\# U = \#V$. Existe un acoplamiento perfecto en $G$ si y sólo si para todo $U'\in \mathcal P(U)$, se satisface que 
+
+\[\# U'\leq\# \bigcup_{i\in U'}\Gamma(i). \]\\
+
+\textbf{Teorema (de Green):} Si $\overline{F} :D \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}^2$ es un campo vectorial continuo de clase  $C^{1}(D)$ con $D$ una región compacta en $\mathbb{R}^2$, entonces
+
+\[\int_{\partial D^{+}}\overline{F}\cdot \mathrm d\overline{\lambda} =\int_{D} \left( \dfrac{\partial}{\partial x}[F_{2}] - \dfrac{\partial}{\partial y}[F_{1}] \right)\, \mathrm dx\, \mathrm dy\]
+donde $\overline{\lambda}: [a,b] \rightarrow \mathbb{R}^2$ es de clase $C^1([a,b])$ a pedazos es una parametrización de $\partial D^{+}$.\\\\
+
+
+\textbf{Teorema:} Sea $X$ una variable aleatoria continua con soporte Sop$_X$ y función de densidad $f_X:\RR\rightarrow\RR$. Sea $\varphi:\RR\rightarrow \RR$ una función inyectiva tal que $\varphi,\varphi^{-1}$ son diferenciables y con $\varphi(x)\neq 0$. Entonces la v.a.c. definida como $Y=\varphi(X)$ tiene función de densidad $f_Y:\RR\rightarrow\RR$ dada por 
+
+\[f_Y(y) = f_X(\varphi^{-1}(y))\left|\dv{y}\varphi^{-1}(y)\right|\1_{\varphi(Sop_X)}(y).\]\\
+
+\textbf{Teorema:} El problema de decisión asociado al problema de empaquetamiento de conjuntos, se puede reducir en orden polinomial al problema SAT.\\\\\\\\\\
+
+\textbf{Teorema (Lebesgue-Radon-Nikodym):} Sean $\nu$ una medida con signo y $\mu$ una medida positiva en $(X,\Sigma)$, ambas $\sigma$-finitas. Entonces existe una única medida $\sigma$-finita $\eta$ en $(X,\Sigma)$ y una función medible $f:X\to\RR$ tales que $\eta \perp \mu,f\mathrm{d}\mu $ es $\sigma$-finita y $\mathrm{d}\nu = \mathrm{d}\eta + f\mathrm{d}\mu $. Si $g$ es otra función que satisface lo anterior, entonces $f=g$ $\mu$-c.d.s.\\\\
+
+\textbf{Teorema (de holguras complementarias):} Sean $x^*$ y $w^*$ soluciones a los problemas primal y dual en su forma canónica. Entonces son soluciones óptimas si y sólo si
+
+\begin{align*}
+(c_j-w^*a_j)x_j^* &=0,\\	
+w_i^*(a^ix^*-b_i) &= 0,
+\end{align*}
+
+para toda $i\in\{1,\dots,n\}$ y $j\in\{1,\dots,m\}$.\\\\
+
+\textbf{Teorema (de dualidad débil):} Sean $x_0$ y $w_0$ soluciones factibles del problema primal y dual respectivamente, entonces $cx_0\geq w_0 b$.\\\\
+
+\textbf{Teorema (Bolzano):} Si $f:[a,b]\to \RR$ una función continua tal que $f(a)<0<f(b)$, entonces existe $x\in[a,b]$ tal que $f(x)=0$.\\\\
+
+\textbf{Teorema (de acoplamiento de König):} En una gráfica bipartita, el número de arcos mínimos necesarios para cubrir todos los nodos es igual al acoplamiento máximo de la gráfica.\\\\
+
+
+\textbf{Teorema:} Sea $K$ un espacio métrico compacto no vacío, entonces toda función continua $f:K\to\RR$ alcanza su máximo y su mínimo en $K$.\\
+
+\textbf{Teorema (Arzelà-Ascoli):} Sean $K$ un espacio métrico compacto y $X$ un espacio métrico completo. Un subconjunto $\Hh$ de $C^0(K,X)$ es relativamente compacto en $C^0(K,X)$ si y sólo si $\Hh$ es equicontinuo y los conjuntos $H(z) = \{f(z):f\in\Hh\}$ son relativamente compactos en $X$ para toda $z\in K$. \\\\
+
+\textbf{Teorema del límite central:} Sea $(X_n)_{n\in \NN}$ una sucesión de v.a.i.i.d.'s con segundo momento finito tales que $\EE[X_i]=\mu$ y $\mathrm{Var}(X_i)=\sigma^2>0$. Si definimos a $S_n$ como
+
+\[S_n = \dfrac{1}{n}\sum_{i=1}^n X_i,\] 
+entonces $\lim_{n\to\infty} S_n \sim N(\mu,\sigma^2)$.\\\\
+
+
+\textbf{Teorema:} Sea $R=(X,A,f)$ una red y sean $N^+,N^-$ subconjuntos ajenos de $X$. Entonces para cualquier coloración de la red $R$ con los colores rojo, verde, blanco y negro, sólo una de las siguientes afirmaciones es válida:
+
+1) El problema de la cadena coloreada tiene una solución P.\\
+2) El problema del corte coloreado tiene una solución Q.\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+\textbf{Teorema del límite central:} Sean $(X_n)_{n\in\NN}\subset L^2$ independientes, con $\EE[X_n]=m_n$ y $\mathrm{Var}(X_n)=\sigma_n^2>0$ para toda $n\in\NN$. Definamos a $S_n = \sum_{k=1}^n X_k$, $s_n^2 = \sum_{k=1}^n \sigma^2_k$ y  
+
+\[L_\epsilon (n) = \dfrac{1}{s_n^2}\sum_{k=1}^n\EE[(X_k-m_k)^2\1_{|X_k-m_k|>\epsilon s_n}].\]
+
+Si $L_\epsilon (n)\rightarrow 0$ cuando $n\to \infty$, entonces
+
+\[\dfrac{1}{s_n}\sum_{k=1}^n(X_k-m_k)^2\]
+
+tiende en distribución a una normal estándar.\\\\
+
+\textbf{Teorema:} Si $f:[a,b]\to \RR$ es continua, entonces $f$ es acotada.\\\\
+
+\textbf{Teorema:} Sean $f,g:[a,b]\to \RR$ de clase $C^n([a,b])$, entonces para cualquier $x\in[a,b]$ se tiene que
+
+\[(f\cdot g)^{(n)}(x)=\sum_{k=0}^n\binom{n}{k}f^{(n-k)}(x)g^{(k)}(x).\]\\
+
+
+
+\[\Ll\left[f^{(n)}\right](p)=p^n\Ll[p]\]\\
+
+\textbf{Teorema (del Umbral en Epidemiología):} Si los números iniciales de infectados y susceptibles son pequeños, entonces el número de individuos que finalmente contraen la enfermedad se reduce a un nivel que dista (por abajo), del valor umbral en la misma proporción que éste distaba del número inicial de susceptibles.\\\\
+
+\textbf{Teorema:} Cualesquiera dos normas en un espacio vectorial de dimensión finita son equivalentes.\\\\
+
+\textbf{Teorema:} Sean $X,Y$ espacios métricos y sea $\varphi:X\to Y$ una función. Entonces $\varphi$ es continua si y sólo si $\varphi^{-1}(U)$ es abierto en $X$ para todo abierto $U$ de $Y$.\\\\
+
+\textbf{Teorema:} Para la elipse $b^2x^2+a^2y^2 = a^2b^2$ y la hipérbola $b^2x^2-a^2y^2 = a^2b^2$, cada una con excentricidad $e$, los focos en $(ae,0)$ y $(-ae,0)$ tienen como directrices correspondientes las rectas cuyas ecuaciones son $x=a/e$ y $x=-a/e$ respectivamente.\\\\
+
+\textbf{Teorema (de la función implícita):} Sean $V,W,Z$ espacios de Banach, $\Omega$ un abierto de $V\times W$, $(v_0,w_0)\in\Omega$ y $\varphi :\Omega \to Z$ una función de clase $C^1(\Omega)$. Si $\varphi(v_0,w_0) = c$ y $\partial_2 \varphi(v_0,w_0)\in \Ll(W,Z)$ es un isomorfismo de Banach, entonces existen $\delta, \eta>0$ tales que $B_V(v_0,\delta)\times B_W(w_0,\eta)\subseteq \Omega$ y una función $f:B_V(v_0,\delta)\to W$ de clase $C^1(B_V(v_0,\delta))$ con las siguientes propiedades:
+
+1) El conjunto de soluciones $(v,w)\in B_V(v_0,\delta)\times B_W(w_0,\eta)$ de la ecuación $\varphi(v,w)=c$ coincide con la gráfica de $f$. En particular, $f(v_0)=w_0$ y $f(v) \in B_W(w_0,\eta)$ para todo $v\in B_V(v_0,\delta)$.
+
+2) Para todo $v\in B_V(v_0,\delta)$ se cumple que $\partial_2\varphi(v,f(v))$ es un isomorfismo de Banach y 
+
+\[f'(v) = -[\partial_2\varphi(v,f(v))]^{-1}\circ \partial_1\varphi(v,f(v))\]
+
+\end{document}

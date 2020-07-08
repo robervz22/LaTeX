@@ -1,0 +1,105 @@
+\documentclass[letterpaper,12pt,oneside,landscape]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Cosas para la portada                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{tgbonum}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{anyfontsize}
+\usepackage{sectsty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[top=1in, left=1.25in, right=1.25in, bottom=1in]{geometry}
+
+\usepackage{ 
+graphicx,       %Para meter figuritas
+enumitem,       %Para hacer listas chidas (Paquete esencial en la vida)
+amsfonts,       %Las letras de pizarra
+amsmath,        %Fracciones, integrales y otras cosas
+amsthm,         %Teoremas
+amssymb,        %Más símbolos
+mathtools,      %MÁS SÍMBOLOS
+mathrsfs,       %Letras cursivas matemáticas
+tikz            %Figuras
+}
+\usetikzlibrary{snakes}
+
+\definecolor{color1}{RGB}{53,53,81}
+\definecolor{color2}{RGB}{255,63,180}
+
+
+\usepackage[ruled,vlined,spanish,onelanguage]{algorithm2e} %Algoritmos
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel} %Para que salgan las cosas en español
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}[overlay, remember picture]
+
+
+\fill[black!5](current page.south west) rectangle (current page.north east);
+
+\shade[left color = color2, right color = color2!90,
+transform canvas = {rotate around = {45:($(current page.north west)+(0,-6)$)}}]
+($(current page.north west)+(0,-6)$) rectangle ++(9,1.5);
+
+\shade[left color = color2, right color = color2!90,
+transform canvas = {rotate around = {45:($(current page.south east)+(0,6)$)}}]
+($(current page.south east)+(0,6)$) rectangle ++(-9,-1.5);
+
+\fill[color1]($(current page.north west)+(0,-1)$) rectangle ($(current page.north east)$); 
+
+\fill[color1]($(current page.north west)+(1,0)$) rectangle ($(current page.south west)$); 
+
+\fill[color1]($(current page.south west)+(0,1)$) rectangle ($(current page.south east)$); 
+
+\fill[color1]($(current page.north east)+(-1,0)$) rectangle ($(current page.south east)$); 
+	
+\node[align=center] at ($(current page.center)+(0,6)$){\fontsize{30}{22}\selectfont{Taller recreativo de \LaTeX}};
+
+\node[align=center] at ($(current page.center)+(0,3)$){\fontsize{22}{22}\selectfont{Este diploma se le entrega a}};
+
+\draw[color1,thick] ($(current page.center)+(10,0)$)--($(current page.center)+(-10,0)$);
+
+\node[align=center] at ($(current page.center)+(0,-2)$){\fontsize{22}{22}\selectfont{por haber finalizado el taller de \LaTeX.}};
+
+\node[align=center] at ($(current page.center)+(-5.5,-6)$){\fontsize{12}{22}\selectfont{Lic. Imanol Nuñez Morales}};
+\node[align=center] at ($(current page.center)+(-5.5,-6.5)$){\fontsize{12}{22}\selectfont\scshape\textcolor{color1}{Instructor}};
+
+\draw[color1,thick] ($(current page.center)+(-1,-5)$)--($(current page.center)+(-10,-5)$);
+
+\node[align=center] at ($(current page.center)+(5.5,-6)$){\fontsize{12}{22}\selectfont{José Fernando Méndez Torres}};
+\node[align=center] at ($(current page.center)+(5.5,-6.5)$){\fontsize{12}{22}\selectfont\scshape\textcolor{color1}{Instructor}};
+
+\draw[color1,thick] ($(current page.center)+(1,-5)$)--($(current page.center)+(10,-5)$);
+\end{tikzpicture}
+
+\begin{minipage}{0.48\textwidth}
+	\includegraphics[height=.4\linewidth]{logo}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\hfill
+	\includegraphics[height=.4\linewidth]{logo2}
+\end{minipage}
+
+
+\end{document}
+
+
+
+
+
+
+
+

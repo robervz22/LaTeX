@@ -1,4 +1,4 @@
-\documentclass[a4paper, landscape, twocolumn,15pt]{article}
+\documentclass[a4paper,12pt]{article}
 %minimal: Este tipo de documento sólo permite establecer el tamaño de la página y la fuente. Documentos MUY cortos
 %proc: Documentos más cortos
 %article: Documentos cortos
@@ -23,10 +23,10 @@ mathtools,      %MÁS SÍMBOLOS
 mathrsfs,       %Letras cursivas matemáticas
 bm,             %Letras matemáticas negritas
 bbm,            %Esta da la indicadora con \mathbbm 1
-actuarialsymbol,%Símbolos actuariales
 physics,        %Símbolos físicos
 chronology,     %Líneas de tiempo
-tikz            %Figuras
+tikz,           %Figuras
+pgfplots        %Gráficas
 }
 \usepackage[ruled,vlined,spanish,onelanguage]{algorithm2e} %Algoritmos
 \usepackage[utf8]{inputenc}
@@ -34,6 +34,8 @@ tikz            %Figuras
 \title{La tarea que pidió Imanol} %Aquí va el título
 \author{Pues yo, quién más}  %El autor
 \date{Hoy} %La fecha
+
+\newcommand{\RR}{\mathbb{R}}
 
 \setlength\parindent{0pt}
 %Quitar sangría
@@ -89,8 +91,6 @@ A + ` = À
 \'a %Poner acento
 \\ %Salto de línea
 Sea $f:[a,b]\to\mathbb R$ una función continua y $F:[a,b]\to\mathbb R$ una función tal que $F'(x)=f(x),$ para toda $x\in [a,b]$, entonces
-\[\int_a^b f(x) \, \text{d}x = F(b)-F(a)\ax[n|]{x} .\] %Fórmulas en grande
-\[\actsymb[n]{A}{x} \]
 \[\dv[n]{f}{x}  \]
 \[3.14^2\pdv[2]{u}{x} =  \pdv[2]{u}{t}\]
 
@@ -216,7 +216,58 @@ Quiero meter matrices al texto $\mathcal{E}leospapie$$\begin{pmatrix}
 \end{pmatrix}$, esto se va a ver feo :'(. $\left(\begin{smallmatrix}
 3 & 2 & 0\\
 4 & 10 & 10\\
-\end{smallmatrix}\right)$
+\end{smallmatrix}\right)$\\ 
+
+
+Definimos a la función $f:[0,1]\to \RR$ dada por $f(x) = x^2/(x+5)$. La gráfica de $f$ es la siguiente
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+title = La persona corriendo,
+axis lines = left,
+xlabel = {Time [h]},
+ylabel = {Distance [m]},
+xmin = 0,
+xmax = 1,
+ymin = 0,
+ymax = 1,
+xtick distance=10^(-1),
+ytick distance=10^(-1),
+legend pos = north east,
+ymajorgrids = true,
+xmajorgrids = true,
+grid style = dashed,
+]
+\addplot[
+domain = 0:1,
+samples = 100,
+color = magenta,
+]{x^2/(x+5)+0.5};
+\addplot[
+color = cyan,
+mark = square,
+]
+coordinates{(0.5,0.5)(0.6,0.6)};
+
+\legend{eee,op};
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+
+\[
+\begin{cases}
+\dot y_1&= 5y_1y_2-y_1\\
+\dot y_2&= 3y_1-y_2
+\end{cases}
+\]
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.9\textwidth,trim =  {0 7.5cm 0 7.5 cm}, clip]{mifigura.pdf}
+\caption{Gráfica de ode45}
+\end{figure}
 
 
 
