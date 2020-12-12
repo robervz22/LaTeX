@@ -1,0 +1,166 @@
+\documentclass[11pt,leqno,openany]{memoir}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-tabla,es-lcroman]{babel}
+\usepackage{fouriernc} % fuente
+\DeclareMathAlphabet{\mathcal}{OMS}{zplm}{m}{n} % matemática caligráfica
+
+% todos los paquetes de matemáticas necesarios
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools} % teoremas un poco más vistosos
+\usepackage{bbm} % blackboard math
+\usepackage{bm} % negritas
+\usepackage[dvipsnames]{xcolor} % acceso a colores por nombre 
+\usepackage{physics} % derivadas y derivadas parciales
+
+% definir los teoremas
+\theoremstyle{plain} % estilo para teoremas, corolarios, lemas, proposiciones
+% Del modo usual con amsthm
+% \newtheorem{theorem}{Teorema}
+% Con thmtools
+\declaretheorem[name=Teorema,%
+shaded={rulecolor=RubineRed,rulewidth=1pt, bgcolor={rgb}{1,1,1}},%
+parent=chapter]{theorem}
+\declaretheorem[name=Proposici\'on,%
+shaded={rulecolor=RoyalPurple,rulewidth=1pt, bgcolor={rgb}{1,1,1}},%
+parent=chapter,sibling=theorem]{proposition}
+\declaretheorem[name=Lema,%
+shaded={rulecolor=RedViolet,rulewidth=1pt, bgcolor={rgb}{1,1,1}},%
+parent=chapter,sibling=theorem]{lemma}
+\declaretheorem[name=Corolario,%
+shaded={rulecolor=Aquamarine,rulewidth=1pt, bgcolor={rgb}{1,1,1}},%
+parent=chapter,sibling=theorem]{corollary}
+\theoremstyle{remark} % observaciones
+\declaretheorem[name=Observaci\'on,parent=chapter,sibling=theorem,%
+shaded={rulecolor=BlueViolet,rulewidth=1pt, bgcolor={rgb}{1,1,1}}]{remark}
+\theoremstyle{definition} % estilo para definiciones, ejercicios
+\declaretheorem[name=Definici\'on,parent=chapter,%
+shaded={rulecolor=Lavender,rulewidth=1pt, bgcolor={rgb}{1,1,1}}]{definition}
+\declaretheoremstyle[spaceabove=10pt, spacebelow=10pt,%
+headfont=\normalfont\bfseries,notefont=\mdseries, notebraces={(}{)},%
+bodyfont=\normalfont,postheadspace=1em,qed=$\bigtriangledown$]{problemas}
+\declaretheorem[name=Problema,style=problemas%,shaded={bgcolor=CarnationPink}]
+]{ejercicio}
+% Para poner nuestro propio problema
+\newcommand{\tarea}{T1}
+\newenvironment{problemin}[1]
+{\renewcommand\theejercicio{#1}\ejercicio}
+{\endejercicio}
+\newenvironment{problemaNum}[1]
+{\renewcommand\theejercicio{\tarea.#1}\ejercicio}
+{\endejercicio}
+
+% Formato de la página
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{*}{1}
+\checkandfixthelayout
+
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\makepagestyle{tareas}
+\makeevenfoot{tareas}{\thepage}{}{}
+\makeoddfoot{tareas}{}{}{\thepage}
+\makeheadrule{tareas}{\textwidth}{\normalrulethickness}
+\makeevenhead{tareas}{Nombre del alumno}{}{Tarea 725}
+\makeoddhead{tareas}{Muerte a las clases en línea}{}{Nombre del alumno}
+
+\chapterstyle{southall}
+\pagestyle{tareas}
+
+\usepackage{etoolbox}
+\makeatletter
+\def\ll@ejercicio{%
+   \protect\thmtopatch@numbernametext
+     \ifx\@empty\thmt@shortoptarg\else[\thmt@shortoptarg]\fi
+     {\csname the\thmt@envname\endcsname}%
+     {\thmt@thmname}%
+}
+
+\newcommand\thmtopatch@numbernametext[3][]{%
+    #3 #2%
+  \if\relax\detokenize{#1}\relax\else\space -- #1\fi
+}
+
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \list{}{\leftmargin=0mm\itemindent=20pt\linewidth=1\textwidth%
+  \item[\hskip\labelsep
+        \sffamily\bfseries
+   #1\@addpunct{.}]\ignorespaces}
+}{%
+  \popQED\endlist\@endpefalse
+}
+
+\makeatother
+
+\usepackage{hyperref}
+\renewcommand{\listtheoremname}{Lista de problemas}
+
+\begin{document}
+
+\chapter*{Tarea la que sea}
+\epigraphtextposition{flushright}
+\epigraphhead[40]{\epigraph{Integrante 1 \\ Integrante 2 \\ Integrante 3 \\ Integrante 4 \\ Integrante 5 \\ Integrante 6}{Procesos Estocásticos \textsc{i} \\ Begoña Fdz. Fdz. \\ Fernando \\ Samantha}}
+
+
+\begin{theorem}
+    Soy un teorema
+\end{theorem}
+
+\begin{proof}
+    Soy la demostración.
+\end{proof}
+
+\begin{proposition}
+    Soy una proposición
+\end{proposition}
+
+\begin{lemma}
+    Soy un lema
+\end{lemma}
+
+\begin{corollary}
+    Soy un corolario
+\end{corollary}
+
+\begin{remark}
+    Soy una observación
+\end{remark}
+
+\begin{definition}
+    Soy una definición
+\end{definition}
+
+\begin{ejercicio}
+    Soy un problema
+\end{ejercicio}
+
+\begin{ejercicio}
+    Soy otro problema
+\end{ejercicio}
+
+\begin{problemin}{6}
+\end{problemin}
+
+\begin{problemaNum}{17}
+\end{problemaNum}
+
+\renewcommand{\tarea}{T2}
+\begin{problemaNum}{3}
+\end{problemaNum}
+
+\renewcommand{\tarea}{C1}
+\begin{problemaNum}{6}[Hoel]
+    problema
+\end{problemaNum}
+
+\newpage
+
+\listoftheorems[ignoreall,show={ejercicio},numwidth=5em]
+
+\end{document}
