@@ -4,6 +4,6 @@ En esta carpeta se encontrarán algunas de las plantillas que he creado para mis
 
 En _Tareas_ se encuentra una plantilla para trabajos cortos, como son las tareas.
 
-En _Reportes_ se encontrará una plantilla para trabajos un poco más largos que las tareas, pero que no tengan capítulos. Ideal para reportes o artículos de clases.
+En _Reportes_ se encontrará una plantilla para trabajos un poco más largos que las tareas, pero que no deban dividirse por capítulos. Ideal para reportes de artículos o resúmenes.
 
 En _Libro_ habrá una plantilla para trabajos de longitud considerable, que requieran capítulos y secciones. Sirve para notas de una clase.
