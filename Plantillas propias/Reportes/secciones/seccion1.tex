@@ -1,0 +1,10 @@
+\section{Estructura del trabajo}
+
+\noindent Usualmente los reportes escritos tienden a ser un poco largos, por lo que no es ideal tener todo el código en un mismo archivo \texttt{.tex}. En este sentido, una de las fortalezas de \LaTeX~es poder incluir subarchivos mediante el uso de las funciones \texttt{\textbackslash{}input} e \texttt{\textbackslash{}include}. Por ejemplo, todas las secciones en este trabajo se incluyen en el archivo \texttt{reporte.tex} mediante el uso de \texttt{\textbackslash{}include\{secciones/seccion1\}}. De manera un poco más estructurada:
+\begin{enumerate}
+    \item Se crea el archivo principal, en este caso \texttt{reportes.tex}
+    \item En el mismo directorio del archivo principal se crea un subdirectorio, en este caso llamado \texttt{secciones}, en el que se crean los archivos \texttt{.tex} correspondientes a las secciones.
+    \item En los archivos correspondientes a las secciones se escribe lo que deba ser escrito.
+    \item Se incluyen los archivos de las secciones en el archivo principal.
+\end{enumerate}
+El hacer esto hace más fácil el poder encontrar errores y modificar, pues limita de algún modo el tamaño de los \texttt{.tex}.

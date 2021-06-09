@@ -1,0 +1,207 @@
+\documentclass[
+    11pt, 
+    leqno, 
+    twoside, 
+    b5paper,
+    mpinclude=true,
+    abstract=true
+    ]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opciones de inputs (útil si no se compila con LuaLaTeX o XeLaTeX)
+%\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Idioma del documento
+\usepackage[spanish,es-nodecimaldot,es-tabla,es-lcroman]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Permitir más alfabetos matemáticos
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Carga el archivo macros.sty que tiene definiciones que se usan más adelante
+\usepackage{macros}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opciones de la fuente pdfLaTeX
+%\usepackage{fouriernc}
+%\usepackage[scale=0.9]{plex-serif}
+%\usepackage[scaled=0.85]{FiraSans}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fuente con LuaLaTex o XeLaTeX, preferentemente LuaLaTeX por microtype
+\usepackage{fontspec}
+\usepackage{fourier-otf}
+\usepackage[
+    DefaultFeatures={Scale=MatchLowercase},
+    RMstyle={Text,Semibold},
+    SSstyle={Text,Semibold},
+    SSconstyle={Text,Semibold},
+    TTstyle={Text,Semibold}]{plex-otf}
+\setsansfont{FiraSans}[Scale=MatchLowercase]
+\setmathfont{Erewhon Math}[Style=leqslant,Scale=MatchUppercase]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Datos del trabajo
+\newcommand{\trabajo}{Título del reporte}
+\newcommand{\materia}{Mi materia favorita}
+\newcommand{\fechaentrega}{31 de febrero de 2371}
+\newcommand{\minombre}{Mi nombre, supongo}
+\author{\minombre}
+\title{\trabajo}
+\date{\fechaentrega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paquetería para floats: 
+\usepackage{graphicx}
+\usepackage{booktabs}
+% Quitar el número de la sección de los contadores de figuras y tablas
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+% Fuente de las palabras Figura y Tabla
+\setkomafont{captionlabel}{\sffamily}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Márgenes
+\usepackage[margin=2cm]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Formato de la encabezados y pies de página
+\usepackage[automark]{scrlayer-scrpage}% sets pagestyle scrheadings automatically
+\clearpairofpagestyles
+\ofoot*{\pagemark}
+\rehead*[]{\trabajo}
+\lehead*[]{\headmark}
+\lohead*[]{\materia}
+\rohead*[]{\headmark}
+
+% Pie de página con líneas para separar el encabezado y el pie de página
+% del resto
+\KOMAoptions{
+  footsepline=1pt:.25\paperwidth,% syntax: footsepline=<thickness>:<length>
+  plainfootsepline,
+  olines,
+  headsepline=0.5pt:\textwidth
+}
+% Recorre la línea a la parte exterior de la hoja
+\ModifyLayer[
+  hoffset=0pt,
+  width=\paperwidth,
+  addvoffset=-5pt% move the line up
+]{scrheadings.foot.above.line}
+\RedeclareLayer[
+  clone=scrheadings.foot.above.line
+]{plain.scrheadings.foot.above.line}
+
+% Fuente de pies de página y encabezados
+\setkomafont{pagenumber}{\normalfont\sffamily\bfseries}
+\setkomafont{pagehead}{\sffamily}
+\renewcommand*{\sectionmarkformat}{}
+\automark*[section]{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paquetería adicional
+\usepackage{microtype}
+\usepackage{multicol}
+\usepackage{anyfontsize}
+\usepackage{ragged2e}
+\usepackage{comment}
+\usepackage{pdfpages}
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Opciones de enlistados
+\usepackage[inline]{enumitem}
+% Los enlistados ahora tienen (i), (ii), ... en el primer nivel y (a), (b), ...
+% en el segundo nivel
+\setlist[1]{parsep=0pt,
+topsep=3pt,
+itemsep=0pt,
+label=\textup{(\roman*)},
+leftmargin=*}
+\setlist[2]{parsep=0pt,
+topsep=3pt,
+itemsep=0pt,
+label=\textup{(\alph*)}, 
+leftmargin=*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefinir el ambiente de demostración para que la fuente de la palabra 
+% Demostración sea sans
+
+\usepackage{etoolbox}
+\makeatletter
+
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist\item\relax{
+    \sffamily#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+  }{%
+  \popQED\endtrivlist\@endpefalse}
+\makeatother
+% Redefinir el símbolo al final de una demostración
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TikZ y PGFPLots
+\usepackage{tikz}
+\usetikzlibrary{
+    knots,
+    hobby,
+    decorations.pathreplacing,
+    shapes.geometric,
+    calc,
+    shapes
+    }
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
+\usepackage{pgfornament}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliografía con BibLaTeX
+\usepackage[backend=biber,style=apa]{biblatex}
+\usepackage{csquotes}
+% Usamos el formato APA
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\urlstyle{same}
+% Cargamos la fuente con los datos bibliográficos
+\addbibresource{demo.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hipervínculos y enlaces dentro del documento
+% Definición de colores
+\definecolor{mytitlecolor}{RGB}{115,35,60}
+\definecolor{mysectioncolor}{RGB}{104,34,139}
+\usepackage{hyperref}
+\hypersetup{
+        colorlinks=true,
+        linkcolor=mysectioncolor,
+        filecolor=magenta,      
+        urlcolor=cyan,
+        pdfauthor={el autor},
+    citecolor=mysectioncolor
+}
+\usepackage[spanish]{cleveref}
+
+\begin{document}
+
+\input{portada}
+
+\maketitle
+
+\begin{abstract}
+    \noindent Aquí va un pequeño resumen del trabajo si es que es necesario. De no serlo, quitar la opción \texttt{abstract=true}. Ahora solamente voy a escribir cosas para llenar espacio y que esto no se vea tan vacío.
+\end{abstract}
+
+\input{secciones/seccion1}
+\input{secciones/seccion2}
+\input{secciones/seccion3}
+\input{secciones/seccion4}
+
+\nocite{*}
+\printbibliography
+
+\end{document}
