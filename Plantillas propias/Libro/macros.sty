@@ -1,0 +1,255 @@
+% Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% macros.sty
+%
+% El objetivo de este archivo es definir comandos útiles para escribir menos código
+% así como definir los ambientes de teorema, definición, etc.
+\ProvidesPackage{macros}[Mis macros]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paquetes que se van a cargar al cargar estas macros
+%%%%% Paquetes símbolos y fuentes matemáticas
+\RequirePackage{mathtools}
+%\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage{bbm}
+\RequirePackage{dsfont}
+\RequirePackage{bm}
+\RequirePackage{mathrsfs}
+\RequirePackage{physics}
+\RequirePackage[bb=px, bbscaled=0.91,
+  cal=txupr, calscaled=.91,
+  frak=euler,frakscaled=.91,
+  scr=boondoxupr]{mathalpha}
+\let\amsmathbb\mathbb
+\let\amsmathcal\mathcal
+\let\amsmathfrak\mathfrak
+\let\amsmathscr\mathscr
+\AtBeginDocument{%
+    \let\mathbb\relax
+    \newcommand{\mathbb}[1]{\amsmathbb{#1}}
+    \let\mathcal\relax
+    \newcommand{\mathcal}[1]{\amsmathcal{#1}}
+    \let\mathfrak\relax
+    \newcommand{\mathfrak}[1]{\amsmathfrak{#1}}
+    \let\mathscr\relax
+    \newcommand{\mathscr}[1]{\amsmathscr{#1}}
+}
+%%%%% Marcos y colores para los ambientes de teoremas...
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[framemethod=tikz]{mdframed}
+% Definiciones importantes
+\newlength{\leftbarwidth}
+\setlength{\leftbarwidth}{3pt}
+\newlength{\leftbarsep}
+\setlength{\leftbarsep}{10pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Esta función permite generar los estilos de teorema, definición y demás con
+% el color que el usuario quiera
+\newcommand{\colorleftbar}[2]{%
+  \newmdenv[topline=false, rightline=false, bottomline=false,innertopmargin=0pt,%
+  linewidth=3pt, innerrightmargin=0pt, leftmargin=-10pt,%
+  innerleftmargin=1pt, skipabove=5pt, skipbelow=0pt,linecolor=#1]{#2}}
+
+% Estilo de teoremas, lemas,...
+\newcommand{\defthmstyle}[3]{
+  \colorleftbar{#1}{#3}
+  %\newenvironment*{#3}{\colorleftbar{#1}}{\endMakeFramed}
+  \declaretheoremstyle[spaceabove=0pt, spacebelow=0pt,headfont=\kern-3pt\sffamily\bfseries,notefont=\mdseries, notebraces={(}{)},
+  headformat={\colorbox{#1}{\NAME~\NUMBER\NOTE.}}, headpunct=,%
+  preheadhook=\begin{#3},%
+  postfoothook=\end{#3},%
+  bodyfont=\slshape,postheadspace=%0.3em
+  \newline]{#2}
+}
+% Definiciones
+\newcommand{\defdfnstyle}[3]{
+  \colorleftbar{#1}{#3}
+  %\newenvironment*{#3}{\colorleftbar{#1}}{\endMakeFramed}
+  \declaretheoremstyle[spaceabove=0pt, spacebelow=0pt,headfont=\kern-3pt\sffamily\bfseries,notefont=\mdseries, notebraces={(}{)},
+  headformat={\colorbox{#1}{\NAME~\NUMBER\NOTE.}}, headpunct=,%
+  preheadhook=\begin{#3},%
+  postfoothook=\end{#3},%
+  bodyfont=\normalfont,postheadspace=\newline]{#2}
+}
+% Observaciones
+\newcommand{\defremstyle}[3]{
+  \colorleftbar{#1}{#3}
+  %\newenvironment*{#3}{\colorleftbar{#1}}{\endMakeFramed}
+  \declaretheoremstyle[spaceabove=0pt, spacebelow=0pt,headfont=\kern-3pt\sffamily\slshape,notefont=\mdseries, notebraces={(}{)},
+  headformat={\colorbox{#1}{\NAME~\NUMBER\NOTE.}}, headpunct=,%
+  preheadhook=\begin{#3},%
+  postfoothook=\end{#3},%
+  bodyfont=\normalfont,postheadspace=\newline]{#2}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paletas de colores bonitas
+
+% Paleta de colores Stabilo Boss
+\definecolor{touchoftorqouise}{RGB}{161,212,207}
+\definecolor{hintofmint}{RGB}{144,203,170}
+\definecolor{creamypeach}{RGB}{244,163,132}
+\definecolor{pinkblush}{RGB}{244,172,182}
+\definecolor{milkyyellow}{RGB}{248,221,116}
+\definecolor{lilachaze}{RGB}{213,182,212}
+\definecolor{cloudyblue}{RGB}{181,201,223}
+\definecolor{dashoflime}{RGB}{223,241,143}
+\definecolor{mellowcoralred}{RGB}{250,118,86}
+\definecolor{cherryblossompink}{RGB}{254,125,143}
+
+% Paleta de colores mildliners Zebra
+\definecolor{fluorpink}{HTML}{FEE7F7}
+\definecolor{fluoryellow}{HTML}{FCFECD}
+\definecolor{fluororange}{HTML}{FEDE89}
+\definecolor{fluorgreen}{HTML}{DAF8F6}
+\definecolor{fluorblue}{HTML}{D8F5FB}
+\definecolor{coolgreen}{HTML}{C8DF99}
+\definecolor{coolblue}{HTML}{B5C0DC}
+\definecolor{coolgrey}{HTML}{DFDAD4}
+\definecolor{coolviolet}{HTML}{E3D6F4}
+\definecolor{coolred}{HTML}{EC7990}
+\definecolor{warmblue}{HTML}{74A7B2}
+\definecolor{warmmagenta}{HTML}{F394F0}
+\definecolor{warmgold}{HTML}{FFD21D}
+\definecolor{warmvermillion}{HTML}{E66B59}
+\definecolor{warmbrown}{HTML}{A77E7C}
+\definecolor{famcoral}{HTML}{FEA3AA}
+\definecolor{famapricot}{HTML}{FFD4AA}
+\definecolor{famlemon}{HTML}{FAFD70}
+\definecolor{famcyan}{HTML}{A0E1F7}
+\definecolor{famgrey}{HTML}{958496}
+\definecolor{brightperiwinkle}{HTML}{6E7DDA}
+\definecolor{brightsummer}{HTML}{21DFB9}
+\definecolor{brightcitrus}{HTML}{E3F57A}
+\definecolor{brightmarigold}{HTML}{ED703A}
+\definecolor{brightfucsia}{HTML}{F8A3EE}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colores para los teoremas, proposiciones,...
+\colorlet{thmcolor}{fluorpink}%Peach}
+\colorlet{propcolor}{fluorgreen}%RubineRed}
+\colorlet{lemcolor}{warmvermillion!20}%Lavender}
+\colorlet{corcolor}{fluorblue}%SkyBlue}
+\colorlet{dfncolor}{brightsummer!30}%BlueGreen}
+\colorlet{rmkcolor}{fluororange!50}%Salmon}
+\colorlet{ntncolor}{coolviolet}
+\colorlet{excolor}{warmmagenta!30}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definición de los ambientes de teorema, definición, etc
+\theoremstyle{plain}
+\defthmstyle{thmcolor}{mytheorems}{thms}
+\defthmstyle{propcolor}{myprops}{props}
+\defthmstyle{lemcolor}{mylems}{lems}
+\defthmstyle{corcolor}{mycors}{cors}
+\declaretheorem[name=Teorema,style=mytheorems]{theorem}
+\declaretheorem[name=Proposici\'on,sibling=theorem,style=myprops]{proposition}
+\declaretheorem[name=Lema,sibling=theorem,style=mylems]{lemma}
+\declaretheorem[name=Corolario,sibling=theorem,style=mycors]{corollary}
+\theoremstyle{definition}
+\defdfnstyle{dfncolor}{mydefinition}{dfns}
+\defdfnstyle{ntncolor}{mynotation}{ntns}
+\declaretheorem[name=Definici\'on,style=mydefinition]{definition}
+\declaretheorem[name=Notaci\'on,style=mynotation]{notation}
+\theoremstyle{remark}
+\defremstyle{rmkcolor}{myremark}{rmks}
+\declaretheorem[name=Observaci\'on,sibling=theorem,style=myremark]
+{remark}
+
+% Macros útiles
+\newcommand{\field}{\mathbb}
+\newcommand{\sets}{\mathcal}
+\newcommand{\filter}{\mathscr}
+\newcommand{\bv}{\mathbf}
+\newcommand{\1}{\mathds{1}}
+\newcommand{\RR}{\field{R}}
+\newcommand{\NN}{\field{N}}
+\newcommand{\EE}{\field{E}}
+\newcommand{\PP}{\field{P}}
+\newcommand{\XX}{\field{X}}
+\newcommand{\QQ}{\field{Q}}
+\newcommand{\CC}{\field{C}}
+\newcommand{\ZZ}{\field{Z}}
+\newcommand{\GG}{\field{G}}
+\newcommand{\FF}{\field{F}}
+\newcommand{\A}{\field{A}}
+\newcommand{\Ff}{\sets{F}}
+\newcommand{\Gg}{\sets{G}}
+\newcommand{\Ee}{\sets{E}}
+\newcommand{\Pp}{\sets{P}}
+\newcommand{\Bb}{\sets{B}}
+\newcommand{\Aa}{\sets{A}}
+\newcommand{\Kk}{\sets{K}}
+\newcommand{\Ii}{\sets{I}}
+\newcommand{\Jj}{\sets{J}}
+\newcommand{\Uu}{\sets{U}}
+\newcommand{\Vv}{\sets{V}}
+\newcommand{\Dd}{\sets{D}}
+\newcommand{\Hh}{\sets{H}}
+\newcommand{\Cc}{\sets{C}}
+\newcommand{\Ss}{\sets{S}}
+\newcommand{\Tt}{\sets{T}}
+\newcommand{\Xx}{\sets{X}}
+\newcommand{\Mm}{\sets{M}}
+\newcommand{\Nn}{\sets{N}}
+\newcommand{\Ll}{\sets{L}}
+\newcommand{\Ww}{\sets{W}}
+\newcommand{\Oo}{\sets{O}}
+\newcommand{\Ba}{\sets{B}a}
+\newcommand{\oo}{\varnothing}
+\let\var\relax\DeclareMathOperator{\var}{Var}
+\newcommand{\proy}[1]{\varphi_{#1}^{}}
+\newcommand{\proyi}[1]{\varphi_{#1}^{-1}}
+\newcommand{\proyp}[2]{\varphi_{#2,#1}^{}}
+\newcommand{\proypi}[2]{\varphi_{#2,#1}^{-1}}
+\let\abs\relax\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\let\norm\relax\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclareRobustCommand{\stirling}{\genfrac\{\}{0pt}{}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\inter}{int}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\esup}{ess\,sup}
+\DeclareMathOperator{\einf}{ess\,inf}
+\DeclareMathOperator{\co}{co}
+\DeclareMathOperator{\gen}{span}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dexp}{Exp}
+\DeclareMathOperator{\dber}{Ber}
+\DeclareMathOperator{\dbin}{Binom}
+\DeclareMathOperator{\dnorm}{N}
+\DeclareMathOperator{\cov}{Cov}
+\let\var\relax\DeclareMathOperator{\var}{Var}
+\newcommand{\converge}[1]{\stackrel{#1}{\longrightarrow}}
+\newcommand{\ccs}{\mathrm{c.s.}}
+\newcommand{\ccd}{\mathrm{c.d.}}
+\newcommand{\io}{\mathrm{i.o.}}
+\newcommand{\iim}{\mathrm{i}}
+\newcommand{\restr}{\!\!\restriction}
+\newcommand{\cond}{\,\vert\,}
+\newcommand{\bcond}{\,\big\vert\,}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand{\normop}[1]{\norm{#1}_{\mathrm{op}}}
+\newcommand{\normope}[1]{\norm*{#1}_{\mathrm{op}}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\makeatletter
+\newcommand{\subsetsim}{\mathrel{\mathpalette\subset@sim\relax}}
+\newcommand{\subset@sim}[2]{%
+  \vtop{\offinterlineskip\m@th
+    \ialign{\hfil##\cr
+      $#1\subset$\cr\noalign{\kern0.5pt}\scalebox{0.9}{$#1\sim$}\cr
+    }%
+  }%
+}
+\makeatother
+% paréntesis inteligentes
+\DeclarePairedDelimiterX{\cpp}[1]{(}{)}{\def\given{\;\delimsize\vert\;}#1}
+\DeclarePairedDelimiterX{\cbk}[1]{[}{]}{\def\given{\;\delimsize\vert\;}#1}
+\DeclarePairedDelimiterX{\cbr}[1]{\lbrace}{\rbrace}{\def\given{\;\delimsize\vert\;}#1}
+\DeclarePairedDelimiterX{\innp}[1]{\langle}{\rangle}{\def\given{\;\delimsize\vert\;}#1}
+
+% Cajas para los "títulos"
+\mdfdefinestyle{miestilo}{backgroundcolor=coolviolet!30,%
+linewidth=0pt,roundcorner=5pt}

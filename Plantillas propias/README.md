@@ -8,4 +8,4 @@ En _Reportes_ se encontrará una plantilla para trabajos un poco más largos que
 
 En _Libro_ habrá una plantilla para trabajos de longitud considerable, que requieran capítulos y secciones. Sirve para notas de una clase.
 
-Todos los archivos con extensión pdf que se encuentren en esta carpeta fueon compilados con LuaLaTeX.
+Todos los archivos con extensión pdf que se encuentren en esta carpeta fueron compilados con LuaLaTeX (TeXLive 2021).
